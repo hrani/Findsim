@@ -51,10 +51,37 @@ if sys.version_info < (3, 4):
 else:
     import importlib      
 
-from simError import SimError
-import simWrap
-import simWrapMoose
-import simWrapHillTau
+foundLib_HillTau_ = False
+
+if __package__ is None or __package__ == '':
+    from simError import SimError
+    import simWrap
+    #import simWrapMoose  
+    from simWrapMoose import SimWrapMoose
+    import simWrapHillTau
+    try:
+        import hillTau
+        foundLib_HillTau_ = True
+    except Exception as e:
+        pass
+
+else:
+    from FindSim.simError import SimError
+    from FindSim.simWrap import SimWrap
+    from FindSim.simWrapMoose import SimWrapMoose
+    try:
+        import HillTau as hillTau
+        foundLib_HillTau_ = True
+    except Exception as e:
+        pass
+
+    if foundLib_HillTau_:
+        from FindSim.simWrapHillTau import SimWrapHillTau
+
+# from simError import SimError
+# import simWrap
+# import simWrapMoose
+# import simWrapHillTau
 
 convertTimeUnits = {'sec': 1.0,'s': 1.0, 
         'ms': 1e-3, 'millisec': 1e-3, 'msec' : 1e-3, 
@@ -982,7 +1009,15 @@ def saveTweakedModel( origFname, dumpFname, mapFile, scaleParam ):
     if extn == '.g' or extn == '.xml':
         localSW = simWrapMoose.SimWrapMoose( mapFile = mapFile, ignoreMissingObj = True, silent = True )
     elif extn == '.json':
-        localSW = simWrapHillTau.SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = True, silent = True )
+        global foundLib_HillTau_
+        if not foundLib_HillTau_:
+            print('No HillTau found.'
+                '\nThis module can be installed by following command in terminal:'
+                '\n\t pip install HillTau')
+            return ("Could not load the model in to HillTau file. \nThis module can be installed by following command in terminal: \n\t pip install HillTau")
+        else:
+            localSW = simWrapHillTau.SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = True, silent = True )
+        
     else:
         print( "Warning: dumpTweakedModel: File format '{}' not known".format( extn ) )
         return
@@ -1089,9 +1124,15 @@ def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile =
     if model.fileName.split('.')[-1] == "json":
         simWrap = "HillTau"
     if simWrap == "":
-        sw = simWrapMoose.SimWrapMoose( mapFile = mapFile, ignoreMissingObj = ignoreMissingObj, silent = silent )
+        sw = SimWrapMoose( mapFile = mapFile, ignoreMissingObj = ignoreMissingObj, silent = silent )
     elif simWrap == "HillTau":
-        sw = simWrapHillTau.SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = ignoreMissingObj, silent = silent )
+        if not foundLib_HillTau_:
+            print('No HillTau found.'
+                '\nThis module can be installed by following command in terminal:'
+                '\n\t pip install HillTau')
+            return ("Could not load the model in to HillTau file. \nThis module can be installed by following command in terminal: \n\t pip install HillTau")
+        else:
+            sw = simWrapHillTau.SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = ignoreMissingObj, silent = silent )
     else:
         sw = simWrap.SimWrap( ignoreMissingObj = ignoreMissingObj )
     model.pauseHsolve = PauseHsolve( optimizeElec )

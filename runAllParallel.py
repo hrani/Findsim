@@ -28,7 +28,7 @@
 /**********************************************************************
 ** This program is part of 'MOOSE', the
 ** Messaging Object Oriented Simulation Environment,
-**           copyright (C) 2003-2018 Upinder S. Bhalla. and NCBS
+**           copyright (C) 2003-2021 Upinder S. Bhalla. and NCBS
 **********************************************************************/
 
 This script runs the findSim program on all tsv files in the specified
@@ -42,8 +42,13 @@ import os
 import sys
 import argparse
 import time
-import findSim
+#import findSim
 from multiprocessing import Pool
+
+if __package__ is None or __package__ == '':
+    import findSim
+else:
+    from FindSim import findSim
 
 resultCount = 0
 def reportReturn( result ):

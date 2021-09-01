@@ -27,7 +27,7 @@
 ** This program is part of 'MOOSE', the
 ** Messaging Object Oriented Simulation Environment,
 ** also known as GENESIS 3 base code.
-**           copyright (C) 2003-2018 Upinder S. Bhalla. and NCBS
+**           copyright (C) 2003-2021 Upinder S. Bhalla. and NCBS
 **********************************************************************/
 
 '''

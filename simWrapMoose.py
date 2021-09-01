@@ -33,8 +33,16 @@ import numpy as np
 import moose
 import sys
 import imp  ## May be deprecated from Python 3.4
-from simWrap import SimWrap 
-from simError import SimError
+
+if __package__ is None or __package__ == '':
+    from simWrap import SimWrap
+    from simError import SimError
+else:
+    from FindSim.simError import SimError
+    from FindSim.simWrap import SimWrap
+
+# from simWrap import SimWrap 
+# from simError import SimError
 
 elecDt = 50e-6
 elecPlotDt = 100e-6
@@ -244,7 +252,7 @@ class SimWrapMoose( SimWrap ):
         if file_extension == '.xml':
             self.modelId, errormsg = moose.readSBML( fname, 'model', 'ee' )
         elif file_extension == '.g':
-            self.modelId = moose.loadModel( fname, 'model', 'ee' )
+            self.modelId = moose.loadModel( fname, 'model', 'ee' )[0]
         # moose.delete('/model[0]/kinetics[0]/compartment_1[0]')
         elif file_extension == '.py':
             # Assume a moose script for creating the model in rdesigneur.
@@ -335,7 +343,7 @@ class SimWrapMoose( SimWrap ):
             stoich = moose.Stoich( compt.path + '/stoich' )
             stoich.compartment = moose.element( compt.path )
             stoich.ksolve = ksolve
-            stoich.reacSystemPath = compt.path + '/##'
+            stoich.path = compt.path + '/##'
             for i in range( 10, 20 ):
                 moose.setClock( i, 0.1 )
 

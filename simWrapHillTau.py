@@ -33,9 +33,36 @@ import json
 import numpy as np
 import moose
 #import imp  ## May be deprecated from Python 3.4
-from simWrap import SimWrap 
-from simError import SimError
-import hillTau
+
+foundLib_HillTau_ = False
+
+if __package__ is None or __package__ == '':
+    from simWrap import SimWrap
+    from simError import SimError
+    try:
+        import hillTau as hillTau
+        foundLib_HillTau_ = True
+    except Exception as e:
+        pass
+else:
+    from FindSim.simError import SimError
+    from FindSim.simWrap import SimWrap
+    try:
+        import HillTau as hillTau
+        foundLib_HillTau_ = True
+    except Exception as e:
+        pass
+'''
+foundLib_HillTau_ = False
+try:
+    import hillTau as hillTau
+    foundLib_HillTau_ = True
+except Exception as e:
+    pass
+'''
+# from simWrap import SimWrap 
+# from simError import SimError
+# import hillTau
 
 SIGSTR = "{:.4g}" # Used for dumping JSON files.
 
