@@ -123,23 +123,21 @@ All these are run using the <a href="https://github.com/BhallaLab/FindSim/releas
 Please change into the branch to run these.  
 
 Figure 6: bottom  
-python findSim.py Curated/FindSim-Jain2009_Fig4F.tsv --model models/synSynth7.g  
+python findSim.py Curated/FindSim-Jain2009_Fig4F.json --model models/synSynth7.g  
 
 Figure 7B:  
-python findSim.py Curated/FindSim-Bhalla1999_fig2B.tsv --model models/synSynth7.g  
-python findSim.py Curated/FindSim-Gu2004_Fig3.tsv --model models/synSynth7.g  
+python findSim.py Curated/FindSim-Bhalla1999_fig2B.json --model models/synSynth7.g  
+python findSim.py Curated/FindSim-Gu2004_Fig3.json --model models/synSynth7.g  
 
 Figure 7C:  
-python findSim.py Curated/FindSim-Ji2010_fig1C_ERK_acute.tsv --model models/synSynth7.g  
+python findSim.py Curated/FindSim-Ji2010_fig1C_ERK_acute.json --model models/synSynth7.g  
 
 Figure 7D:  
-python findSim.py Curated/FindSim-Bhalla1999_fig4C.tsv --model models/synSynth7.g  
+python findSim.py Curated/FindSim-Bhalla1999_fig4C.json --model models/synSynth7.g  
 
 =============================================================================
 # Other resources
 Project is hosted at https://github.com/BhallaLab/FindSim
-
-The web template for experiment worksheet can be found here https://www.ncbs.res.in/faculty/bhalla-findsim/worksheet  
 
 The MOOSE site: http://moose.ncbs.res.in  
 
