@@ -517,8 +517,12 @@ class SimWrapMoose( SimWrap ):
         self.numMainPlots = 0
         for i in readouts:
             readoutElmPaths = []
-            for j in i.entities:
-                readoutElmPaths.extend( self.lookup(j) )
+            # for j in i.entities:
+            #     readoutElmPaths.extend( self.lookup(j) )
+            if isinstance(i.entities,str):
+                readoutElmPaths.extend(self.lookup(i.entities))
+            elif isinstance(i.entities,list):
+                readoutElmPaths.extend( self.lookup(' '.join(map(str, i.entities))) )
             for elmPath in readoutElmPaths:
                 ######Creating tables for plotting for full run #############
                 if elmPath == '/' or not moose.exists( elmPath ):
@@ -692,9 +696,10 @@ class SimWrapMoose( SimWrap ):
                 moose.start( settleTime )
                 for elm, field, oldval in orig: # Put values back.
                     elm.setField( field, oldval )
-
             ret.append( self.sumFields( responseList[0], responseList[1] ) )
-            ref.append( self.sumFields( responseList[2], responseList[3] ) )
+            if responseList[2]:
+                ref.append( self.sumFields( responseList[2], responseList[3] ) )
+            
         return ret, ref
 
     def deleteSimulation( self ):
@@ -706,8 +711,9 @@ class SimWrapMoose( SimWrap ):
 
     def sumFields( self, entityList, field ):
         tot = 0.0
-        for rr in entityList:
-            elmPaths = self.lookup( rr )
+        #for rr in entityList:
+        if entityList != "" :
+            elmPaths = self.lookup( entityList )
             for ePath in elmPaths:
                 if ePath != '/' and moose.exists( ePath ):
                     e = moose.element( ePath )
@@ -727,6 +733,7 @@ class SimWrapMoose( SimWrap ):
                 self.modelLookup[ entity ] = [ foundObj.path ]
         elmPathList = self.lookup(entity)
         #print( "IN GetOBJParam, elmPathList = ", elmPathList )
+
         if len( elmPathList ) != 1:
             if isSilent:
                 return -2.0
@@ -734,7 +741,7 @@ class SimWrapMoose( SimWrap ):
         if elmPathList[0] == '/' or not moose.exists( elmPathList[0] ):
             if isSilent:
                 return -2.0
-            moose.le( '/model[0]/kinetics[0]/MAPK[0]/MAPK_p_p[0]' )
+            #moose.le( '/model[0]/kinetics[0]/MAPK[0]/MAPK_p_p[0]' )
             raise SimError( "SimWrapMoose::getObjParam: elm {} not found, check".format( elmPathList[0] ) )
 
         elm = moose.element( elmPathList[0] )

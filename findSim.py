@@ -291,13 +291,13 @@ class Readout:
                 elif self.normMode == "start":
                     self.ratioReferenceTime = 0
                 elif self.normMode == "presetTime":
-                    self.ratioReferenceTime = norm["time"]
+                    self.ratioReferenceTime = norm["sampTime"]
                 elif self.normMode == "each":
                     self.ratioReferenceTime = -1
                 elif self.normMode == "dose":
                     self.ratioReferenceDose = norm["dose"]
                     self.settleTime = ro.get("settleTime")
-                    self.ratioReferenceTime = norm.get("time")
+                    self.ratioReferenceTime = norm.get("sampTime")
                     if not self.ratioReferenceTime:
                         self.ratioReferenceTime = self.settleTime
             # Set up lists to use in the analysis
@@ -361,14 +361,21 @@ class Readout:
     def configure( self, modelLookup ):
         """Sanity check on all fields. First, check that all the entities
         named in experiment have counterparts in the model definition"""
-        for i in self.entities:
-            #if not i.encode("ascii") in modelLookup:
-            if not i in modelLookup:
-                raise SimError( "Readout::configure: Error: object {} not defined in model lookup.".format( i ) )
-        for i in self.ratioReferenceEntities:
-            #if not i.encode("ascii") in modelLookup:
+        # for i in self.entities:
+        #     #if not i.encode("ascii") in modelLookup:
+        i = self.entities
+        if not i in modelLookup:
+            raise SimError( "Readout::configure: Error: object {} not defined in model lookup.".format( i ) )
+        if isinstance(self.ratioReferenceEntities,str):
+            i = self.ratioReferenceEntities
             if not i in modelLookup:
                 raise SimError( "Readout::configure: Error: ratioReferenceEntity '{}' not defined in model lookup.".format( i ) )
+        elif isinstance(self.ratioReferenceEntities,list):
+            if not i in modelLookup:
+                raise SimError( "Readout::configure: Error: ratioReferenceEntity '{}' not defined in model lookup.".format( i ) )
+        # for i in self.ratioReferenceEntities:
+        #     #if not i.encode("ascii") in modelLookup:
+        
 
     def digestSteadyStateRun( self, ref, ret ):
         if self.useNormalization:
@@ -380,7 +387,7 @@ class Readout:
                 referenceAtExtraDose = ref.pop()
                 ref = [referenceAtExtraDose] * len( ref )
                 tempret = ret.pop() # Pop the readout mol here too.
-            elif self.normMode == "start": 
+            elif self.normMode == "start":
                 ref = [ref[0]] * len( ret )
             elif self.normMode == "end": 
                 ref = [ref[-1]] * len( ret )
@@ -388,7 +395,7 @@ class Readout:
                 ref = [min(ref)] * len( ret )
             elif self.normMode == "max": 
                 ref = [max(ref)] * len( ret )
-            elif self.normMode == "presetTime": 
+            elif self.normMode == "presetTime":
                 print( "Probably you want sampling mode to be one of: start, end, min, max, dose. Defaulting to 'start'")
                 ref = [ref[0]] * len( ret )
         else:
@@ -416,7 +423,10 @@ class Readout:
         else:
             separator = "."
         if not deferPlot:
-            plt.figure( self.entities[0] + "." + self.field )
+            if isinstance(self.entities,str):
+                plt.figure( self.entities + "." + self.field )
+            elif isinstance(self.entities,list):
+                plt.figure( self.entities[0] + "." + self.field )
         if "doseresponse" in exptType:
             for i in stims[0].entities:
                 #elms = modelLookup[i.encode("ascii")]
@@ -429,15 +439,16 @@ class Readout:
                     pp.plotme( fname, pp.ylabel, joinSimPoints = True, 
                             labelPos = labelPos )
         elif "barchart" in exptType:
-            for i in self.entities:
+            #for i in self.entities:
                 #elms = modelLookup[i.encode("ascii")]
                 #elms = modelLookup.get( i.encode("ascii") )
-                elms = modelLookup.get( i )
-                if not elms:
-                    raise SimError( "displayPlots 2: could not find entity '{}'".format(i) )
-                for j in elms:
-                    pp = PlotPanel( self, exptType, xlabel = str(j) +' ('+stims[0].quantityUnits+')', useBigFont = bigFont )
-                    pp.plotbar( self, stims, fname, labelPos = labelPos )
+            i = self.entities
+            elms = modelLookup.get( i )
+            if not elms:
+                raise SimError( "displayPlots 2: could not find entity '{}'".format(i) )
+            for j in elms:
+                pp = PlotPanel( self, exptType, xlabel = str(j) +' ('+stims[0].quantityUnits+')', useBigFont = bigFont )
+                pp.plotbar( self, stims, fname, labelPos = labelPos )
         elif "timeseries" in exptType:
             tsUnits = self.quantityUnits
             '''
@@ -1169,6 +1180,7 @@ def parseAndRunDoser( model, stims, readouts ):
     doseMol = ""
     #Stimulus Molecules
     #Assuming one stimulus block, one molecule allowed
+    #print("1183 ",readouts.entities)
     runDoser( model, stims[0], readouts )
     score = processReadouts( readouts, model.scoringFormula )
     #print( "DoserScore = ", score )
@@ -1188,7 +1200,7 @@ def runDoser( model, stim, readout ):
     ret, ref = sw.steadyStateStims( stimList, responseList, isSeries = True, settleTime = readout.settleTime )
     if len( readout.ratioReferenceEntities ) > 0 and readout.ratioReferenceTime < EPS:
         # Special case where the extra entry is the value at reset time.
-        refLast = sw.getObjParam(readout.ratioReferenceEntities[0], "concInit" )
+        refLast = sw.getObjParam(readout.ratioReferenceEntities, "concInit" )
         ret.append( ret[-1] )
         ref.append( refLast )
 
@@ -1216,8 +1228,10 @@ def runBarChart( model, stims, readout ):
     for i in readout.bardata:
         stimLine = [ stimSource[ j ] for j in i["stimulus"] ]
         stimList.append( stimLine )
-
-    responseList = [ readout.entities, readout.field, readout.ratioReferenceEntities, readout.field ]
+    if readout.ratioReferenceEntities:
+        responseList = [ readout.entities, readout.field, readout.ratioReferenceEntities, readout.field ]
+    else:
+        responseList = [ readout.entities, readout.field, "", readout.field ]
     #print( responseList )
     # Some fuzzy normalization stuff
     if readout.useNormalization and readout.normMode == "presetTime":
@@ -1251,8 +1265,12 @@ def parseAndRunBarChart( model, stims, readouts ):
 class PlotPanel:
     def __init__( self, readout, exptType, xlabel = '', useBigFont=False ):
         self.name=[]
-        for i in readout.entities:
-            self.name.append( i )
+        # for i in readout.entities:
+        #     self.name.append( i )
+        if isinstance(readout.entities,str):
+            self.name.append(readout.entities)
+        elif isinstance(readout.entities,list):
+            self.name = readout.entities
         self.exptType = exptType
         self.useXlog = readout.useXlog
         self.useYlog = readout.useYlog
@@ -1583,7 +1601,6 @@ def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile =
                     readoutVec.append( readouts.plotCopy( sp[0], sp[1] ) )
             else:
                 print("Warning: Experiment design is '{}'. Only 'TimeSeries' supports extra plots. Skipping".format( experiment.exptType ) )
-
         sw.makeReadoutPlots( readoutVec )
         if 'timeseries' in expt.exptType:
             minInterval = readouts.getMinInterval()
@@ -1620,9 +1637,11 @@ def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile =
             for rd in readoutVec:
                 rd.displayPlots( exptFile, model._tempModelLookup, stims, hideSubplots, expt.exptType, bigFont = bigFont, labelPos = labelPos,
                         deferPlot = deferPlot )
-            print( "Score= {:.4f} for {:34s} UserT= {:.1f}s, evalT= {:.3f}s".format( score, os.path.basename(exptFile), elapsedTime, sw.runtime ) )
+            print( "Score = {:.4f} for {:34s} UserT= {:.1f}s, evalT= {:.3f}s".format( score, os.path.basename(exptFile), elapsedTime, sw.runtime ) )
+            
             if not deferPlot:
                 plt.show()
+                #pass
 
         '''
             plt.figure( "Main FindSim Plots" )
