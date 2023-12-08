@@ -46,7 +46,7 @@ import copy
 import os
 import re
 import time
-
+import schemavalidator 
 if sys.version_info < (3, 4):
     import imp               # This is apparently deprecated in Python 3.4 and up
 else:
@@ -1425,11 +1425,14 @@ def loadJson( fname, mapFile ):
 
     with open( fs ) as _schema:
         schema = json.load( _schema )
-    try:
-        jsonschema.validate( findsim, schema )
-    except jsonschema.exceptions.ValidationError:
-        print( "Failed to validate findSim file {}".format( fname ) )
-        raise
+
+    schemavalidator.jsonschemaValidator(fs,fname)
+
+    # try:
+    #     jsonschema.validate( findsim, schema )
+    # except jsonschema.exceptions.ValidationError:
+    #     print( "Failed to validate findSim file {}".format( fname ) )
+    #     raise
     expt = Experiment( findsim["Metadata"], findsim["Experiment"] )
     stims = Stimulus.load( findsim ) # Stimuli are an optional argument
     readouts = Readout( findsim )
