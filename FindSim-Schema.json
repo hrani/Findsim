@@ -114,7 +114,7 @@
                     },
                     "entity": {"type": "string" },
                     "details": {"type": "string" },
-                    "uniport-chemML": {"type": "string" },
+                    "identifier": {"enum": ["UnitProt","ChEMBL"] },
                     "label": {
                         "type": "string",
                         "description" : "label is used only by BarCharts. It uniquely identifies stimulus blocks. By default the BarChart uses the _entity_ name, but in case there are multiple stimuli involving the same entity the _label_ lets one give each a unique identifier."
@@ -148,7 +148,7 @@
                 },
                 "entities": {"type": "string"},
                 "details": {"type": "string" },
-                "uniport-chemML": {"type": "string" },
+                "identifier": {"enum": ["UnitProt","ChEMBL"] },
                 "field": {"type": "string" },
                 "window": {"type": "object",
                         "properties": {
@@ -178,7 +178,7 @@
                             "description": "If the entities here are different from the primary readout entities, it is a ratio calculation. If they are the same, it is a normalization."
                         },
                         "details": {"type": "string" },
-                        "uniport-chemML": {"type": "string" }
+                        "identifier": {"enum": ["UnitProt","ChEMBL"] }
                     },
                     "required": ["sampling", "entities"],
                     "additionalProperties": false,
