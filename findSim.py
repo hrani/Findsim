@@ -1329,6 +1329,7 @@ class PlotPanel:
         simBar = plt.bar(barpos + width/2, self.sim, width, color='IndianRed', label='Sim')
         plt.xlabel( "Stimulus combinations", fontsize=self.labelFontSize)
         plt.ylabel( self.ylabel, fontsize = self.labelFontSize )
+        scriptName = "FindSim comparison for: "+os.path.basename(scriptName)
         plt.title( scriptName, fontsize = self.labelFontSize )
         plt.legend( loc=labelPos, fontsize = self.tickFontSize, frameon=False )
         #ticklabels = [ i["stimulus"] for i in readout.bardata ] 
