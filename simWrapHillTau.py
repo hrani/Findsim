@@ -575,7 +575,8 @@ class SimWrapHillTau( SimWrap ):
                         self.setField( elm, "concInit", oldval )
 
             ret.append( self.sumFields( responseList[0], responseList[1] ) )
-            ref.append( self.sumFields( responseList[2], responseList[3] ) )
+            if responseList[2]:
+                ref.append( self.sumFields( responseList[2], responseList[3] ) )
         return ret, ref
         
     def deleteSimulation( self ):
