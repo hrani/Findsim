@@ -348,8 +348,13 @@ class SimWrapHillTau( SimWrap ):
     def makeReadoutPlots( self, readouts ):
         numPlots = 0
         self.numMainPlots = 0
+        readoutElmPaths = []
         for i in readouts:
-            for j in i.entities:
+            if isinstance(i.entities,str):
+                readoutElmPaths.extend(self.lookup(i.entities))
+            elif isinstance(i.entities,list):
+                readoutElmPaths.extend( self.lookup(' '.join(map(str, i.entities))) )
+            for j in readoutElmPaths:
                 if not j in self.modelLookup:
                     continue
                 objList = self.modelLookup[ j ]
@@ -405,8 +410,9 @@ class SimWrapHillTau( SimWrap ):
     def sumFields( self, entityList, field ):
         t0 = time.time()
         tot = 0.0
-        for rr in entityList:
-            elms = self.modelLookup[rr]
+        #for rr in entityList:
+        if entityList != "" :
+            elms = self.modelLookup[entityList]
             for e in elms:
                 mi = self.model.molInfo[e]
                 tot += self.model.conc[ mi.index ]
