@@ -22,6 +22,7 @@
                         "PMID": {"type": "number"},
                         "doi": {"type": "string" },
                         "url": {"type": "string"},
+                        "descriptor":{"type":"string"},
                         "authors": {"type": "string"},
                         "affiliation":{"type":"string"},
                         "journal": {"type": "string"},
@@ -49,7 +50,7 @@
                         },
                         {"properties": {
                                 "sourceType": {"const": "simulation"},
-                                "url": {"type": "string"},
+                                "descriptor": {"type": "string"},
                                 "authors": {"type": "string"}
                                   },
                                   "required": ["authors"]
@@ -114,7 +115,8 @@
                     },
                     "entity": {"type": "string" },
                     "details": {"type": "string" },
-                    "identifier": {"enum": ["UnitProt","ChEMBL"] },
+                    "identifier-type": {"enum": ["UnitProt","ChEMBL"] },
+                    "identifier": {"type":"string"},
                     "label": {
                         "type": "string",
                         "description" : "label is used only by BarCharts. It uniquely identifies stimulus blocks. By default the BarChart uses the _entity_ name, but in case there are multiple stimuli involving the same entity the _label_ lets one give each a unique identifier."
@@ -148,7 +150,8 @@
                 },
                 "entities": {"type": "string"},
                 "details": {"type": "string" },
-                "identifier": {"enum": ["UnitProt","ChEMBL"] },
+                "identifier-type": {"enum": ["UnitProt","ChEMBL"] },
+                "identifier": {"type":"string"},
                 "field": {"type": "string" },
                 "window": {"type": "object",
                         "properties": {
@@ -178,7 +181,8 @@
                             "description": "If the entities here are different from the primary readout entities, it is a ratio calculation. If they are the same, it is a normalization."
                         },
                         "details": {"type": "string" },
-                        "identifier": {"enum": ["UnitProt","ChEMBL"] }
+                        "identifier-type": {"enum": ["UnitProt","ChEMBL"] },
+                        "identifier": {"type":"string"},
                     },
                     "required": ["sampling", "entities"],
                     "additionalProperties": false,
