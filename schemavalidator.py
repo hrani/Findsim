@@ -65,7 +65,7 @@ def jsonschemaValidator( fschema,fname):
             
             try:
                 jsonschema.validate( findsim, schema )
-                print(filename,"JSON data is valid.")
+                #print(filename,"JSON data is valid.")
             except jsonschema.exceptions.ValidationError as e:
                 print( "Failed to validate findSim file {}".format( fname ) )
                 print(e.message)

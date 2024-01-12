@@ -350,18 +350,14 @@ class SimWrapHillTau( SimWrap ):
         self.numMainPlots = 0
         readoutElmPaths = []
         for i in readouts:
-            if isinstance(i.entities,str):
-                readoutElmPaths.extend(self.lookup(i.entities))
-            elif isinstance(i.entities,list):
-                readoutElmPaths.extend( self.lookup(' '.join(map(str, i.entities))) )
-            for j in readoutElmPaths:
-                if not j in self.modelLookup:
-                    continue
-                objList = self.modelLookup[ j ]
-                for objName in objList:
-                    index = self.model.molInfo[objName].index
-                    self.plotPath[objName] = [ index, numPlots ]
-                    numPlots += 1
+            j = i.entities
+            if not j in self.modelLookup:
+                continue
+            objList = self.modelLookup[ j ]
+            for objName in objList:
+                index = self.model.molInfo[objName].index
+                self.plotPath[objName] = [ index, numPlots ]
+                numPlots += 1
             if not i.isPlotOnly:
                 self.numMainPlots = numPlots
         self.plots = [[]]*numPlots

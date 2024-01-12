@@ -64,7 +64,6 @@ try:
     foundLib_HillTau_ = True
 except Exception as e:
     pass
-
 if __package__ is None or __package__ == '':
     from simError import SimError
     from simWrap import  SimWrap
@@ -340,7 +339,7 @@ class Readout:
 
     def plotCopy( self, entity, field):
         ret = copy.copy( self )
-        ret.entities = [ entity ]
+        ret.entities = entity
         ret.field = field
         if field == 'conc' or field == 'concInit':
             if self.field in ['conc', 'concInit'] and not self.quantityUnits == 'ratio':
@@ -1180,7 +1179,6 @@ def parseAndRunDoser( model, stims, readouts ):
     doseMol = ""
     #Stimulus Molecules
     #Assuming one stimulus block, one molecule allowed
-    #print("1183 ",readouts.entities)
     runDoser( model, stims[0], readouts )
     score = processReadouts( readouts, model.scoringFormula )
     #print( "DoserScore = ", score )
@@ -1232,7 +1230,6 @@ def runBarChart( model, stims, readout ):
         responseList = [ readout.entities, readout.field, readout.ratioReferenceEntities, readout.field ]
     else:
         responseList = [ readout.entities, readout.field, "", readout.field ]
-    #print( responseList )
     # Some fuzzy normalization stuff
     if readout.useNormalization and readout.normMode == "presetTime":
         stimList.append( [] )
@@ -1588,7 +1585,8 @@ def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile =
             if expt.exptType in ['barchart', 'doseresponse'] and i.isBuffered:
                 sw.changeParams( [( i.entities[0], "isBuffered", 1 ),] )
         if readouts.field in Readout.postSynFields:
-            readouts.stim = readoutStim 
+            readouts.stim = readoutStim
+
         readoutVec = [readouts]
         if plots:
             if expt.exptType == "timeseries":
@@ -1601,11 +1599,18 @@ def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile =
                     if len(sp) != 2:
                         print("Field missing. Specify plot item as entity.field:", sp)
                         continue
-                    #readoutVec.append( readouts.plotCopy( entity[0], sp[1] ) )
+        
                     readoutVec.append( readouts.plotCopy( sp[0], sp[1] ) )
             else:
                 print("Warning: Experiment design is '{}'. Only 'TimeSeries' supports extra plots. Skipping".format( experiment.exptType ) )
+        #Checking and removing duplicate plots
+        readoutVec_unique  = {}
+        for ii in readoutVec:
+            if model._tempModelLookup.get(ii.entities)[0] not in readoutVec_unique:
+                readoutVec_unique[model._tempModelLookup.get(ii.entities)[0]] = ii
+        readoutVec = list(readoutVec_unique.values())
         sw.makeReadoutPlots( readoutVec )
+        
         if 'timeseries' in expt.exptType:
             minInterval = readouts.getMinInterval()
             for s in stims:
