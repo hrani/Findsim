@@ -517,7 +517,7 @@ class SimWrapMoose( SimWrap ):
         self.numMainPlots = 0
         for i in readouts:
             readoutElmPaths = []
-            for j in i.entities:
+            for j in [i.entities['name']]:
                 readoutElmPaths.extend( self.lookup(j) )
             for elmPath in readoutElmPaths:
                 ######Creating tables for plotting for full run #############
@@ -596,7 +596,7 @@ class SimWrapMoose( SimWrap ):
     def deliverStim( self, qe ):
         field = qe.entry.field
         #field = model.fieldLookup[s.field]
-        for name in qe.entry.entities:
+        for name in [qe.entry.entities[0]['name']]:
             if not name in self.modelLookup:
                 raise SimError( "simWrapMoose::deliverStim: entity '{}' not found, check object map".format( name ) )
             elmPaths = self.modelLookup[name]
@@ -683,7 +683,7 @@ class SimWrapMoose( SimWrap ):
                         raise SimError( "simWrapMoose::deliverStim: entity '{}' not found, check object map".format( stimEntity ) )
                     elmPath = self.modelLookup[stimEntity][0]
                     if elmPath == '/' or not moose.exists( elmPath ):
-                        raise SimError( "simWrapMoose::deliverStim: Obj for entity '{}' = '{}' not found, check if it has been deleted".format( stimEntity[0], elmPath ) )
+                        raise SimError( "simWrapMoose::deliverStim: Obj for entity '{}' = '{}' not found, check if it has been deleted".format( stimEntity, elmPath ) )
                     elm = moose.element( elmPath )
 
                     orig.append( (elm, field, elm.getField( field ) ) )
@@ -692,8 +692,8 @@ class SimWrapMoose( SimWrap ):
                 moose.start( settleTime )
                 for elm, field, oldval in orig: # Put values back.
                     elm.setField( field, oldval )
-
             ret.append( self.sumFields( responseList[0], responseList[1] ) )
+
             ref.append( self.sumFields( responseList[2], responseList[3] ) )
         return ret, ref
 
@@ -758,7 +758,6 @@ class SimWrapMoose( SimWrap ):
                 ret[i.path] = i.n
         self.deleteSimulation()
         print( "Done global settle time {:.2f} in {:.2f} seconds".format( settleTime, time.time()-t0))
-        print( "s", end = '' )
         sys.stdout.flush()
         return ret
 
