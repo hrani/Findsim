@@ -129,16 +129,7 @@ class SimWrapHillTau( SimWrap ):
                 dictReac["Amod"] = reac.Amod
 
     def deleteItems( self, itemsToDelete ):
-        self.modifiedModelDict = dict( self.jsonDict )
-        # Update the Description and Author fields to reflect subsetting.
-        description = self.modifiedModelDict.get("Description")
-        if not description:
-            description = ""
-        self.modifiedModelDict["Description"] = description + ": Original model modified by findSim for subset calculations."
-        author = self.modifiedModelDict.get("Author")
-        if not author:
-            author = ""
-        self.modifiedModelDict["Author"] = author + ": Programmatic modification by findSim at " + datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        self.setupModifyDict()
         # This accumulates a list of objects to delete, which is then
         # applied to the model once it is built.
         # Note that we silently ignore requests to delete nonexistent 
@@ -167,12 +158,12 @@ class SimWrapHillTau( SimWrap ):
             ret = groups.pop( dd, None )
             if ret != None:
                 deleteSet.discard( dd )
-        for dd in deleteSet:    # Now look for inner objects
+        for dd in set(deleteSet):    # Now look for inner objects
             ret = self.deleteObjFromModel( groups, dd )
             if ret != None:
                 deleteSet.discard( dd )
 
-    def deleteObjFromModel( groups, dd ):
+    def deleteObjFromModel(self, groups, dd ):
         for gg in groups.values():
             rr = gg.get( "Reacs" )
             if rr and dd in rr:
@@ -247,9 +238,12 @@ class SimWrapHillTau( SimWrap ):
         groups = self.modifiedModelDict["Groups"]
         for gg, gval in groups.items():
             for objType, tval in gval.items():
+                if objType == "comment":
+                    continue
                 val = tval.get( obj )
                 if val != None:
                     return [ gg, objType, obj, val ]
+        print( "Error: Unable to find dict of specified object '{}'. Did you delete it in the experiment file?".format( obj ) )
         assert( 0 )
 
 
@@ -422,6 +416,18 @@ class SimWrapHillTau( SimWrap ):
         else:
             return scaleParam
 
+    def setupModifyDict( self ):
+        self.modifiedModelDict = dict( self.jsonDict )
+        # Update the Description and Author fields to reflect subsetting.
+        description = self.modifiedModelDict.get("Description")
+        if not description:
+            description = ""
+        self.modifiedModelDict["Description"] = description + ": Original model modified by findSim for subset calculations."
+        author = self.modifiedModelDict.get("Author")
+        if not author:
+            author = ""
+        self.modifiedModelDict["Author"] = author + ": Programmatic modification by findSim at " + datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+
     def loadModelFile( self, fname, modifyFunc, scaleParam, dumpFname, paramFname ):
         #t0 = time.time()
         #print( "Loading model file ", fname, " with numScale = ", len(scaleParam)  )
@@ -435,7 +441,10 @@ class SimWrapHillTau( SimWrap ):
             # modifyFunc comes back as deleteItems, subsetItems, prune, changeParams
             self.buildModelLookup( self.objMap ) 
             modelWarning = "Warning in subsetting from: " + fname
-            modifyFunc( {}, modelWarning ) # Callback.
+            if modifyFunc == None:
+                self.setupModifyDict()
+            else:
+                modifyFunc( {}, modelWarning ) # Callback.
             t0 = time.time()
             self.model = hillTau.parseModel( self.jsonDict )
             #print( "loadModelFile: scaling parms {}".format( scaleParam ) )

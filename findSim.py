@@ -1383,7 +1383,7 @@ def saveTweakedModel( origFname, dumpFname, mapFile, scaleParam ):
     for i in scaleParam:
         sp.extend( i )
     localSW.deleteSimulation()
-    localSW.loadModelFile( origFname, silentDummyModify, sp, dumpFname, "")
+    localSW.loadModelFile( origFname, None, sp, dumpFname, "")
     localSW.deleteSimulation()
 
 def dummyModify( erSPlist, modelWarning ):

@@ -399,7 +399,8 @@ class SimWrapMoose( SimWrap ):
         # We have to scale params _before_ modifying the model since the
         # expt modifications override anything done to the model params.
         self._scaleParams( scaleParam )
-        modifyFunc( erSPlist, modelWarning )
+        if modifyFunc != None:
+            modifyFunc( erSPlist, modelWarning )
         self.turnOffElec = False
         if file_extension == ".py":
             # Deprecated. Here we override the rdes to NOT make a solver.
