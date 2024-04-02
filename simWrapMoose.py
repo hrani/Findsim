@@ -32,6 +32,7 @@ import ntpath
 import numpy as np
 import moose
 import sys
+from importlib import util
 
 # import imp  ## May be deprecated from Python 3.4
 # from simWrap import SimWrap 
@@ -379,9 +380,15 @@ class SimWrapMoose( SimWrap ):
             # Following the load() command, the chemical system for the 
             # model must live under
             #       /library/chem
-            mscript = imp.load_source( "mscript", fname )
-            #mscript = __import__( fileName )
+            spec = util.spec_from_file_location("mscript", fname )
+            mscript = util.module_from_spec(spec)
+            spec.loader.exec_module(mscript)
             rdes = mscript.load()
+            '''
+            # Deprecated Python syntax from pre 3.3
+            mscript = imp.load_source( "mscript", fname )
+            rdes = mscript.load()
+            '''
             if not moose.exists( '/library/chem' ):
                 if ( moose.exists( '/library/cell' ) ):
                     self.modelId = moose.element( '/library/cell' )
