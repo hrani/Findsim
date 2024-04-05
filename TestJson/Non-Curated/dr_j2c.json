@@ -24,7 +24,10 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "nM",
-            "entity": "BDNF",
+            "entity" : {
+                "name": "BDNF",
+                "alias": "BDNF"
+            },
             "field": "conc"
         }
     ],
@@ -32,52 +35,30 @@
         "timeUnits": "sec",
         "settleTime": 300,
         "quantityUnits": "nM",
-        "entities": [
-            "SHCp"
-        ],
+        "entity" : {
+            "name": "aSHC",
+            "alias": "SHCp"
+            },
         "field": "conc",
         "data": [
-            [
-                0,
-                0,
-                0
-            ],
-            [
-                1,
-                6.5,
-                0
-            ],
-            [
-                2,
-                12.5,
-                0
-            ],
-            [
-                3.8,
-                14,
-                0
-            ],
-            [
-                7.5,
-                18,
-                0
-            ]
+            [0, 0, 0],
+            [1, 6.5, 0],
+            [2, 12.5, 0],
+            [3.8, 14, 0],
+            [7.5, 18, 0]
         ]
     },
     "Modifications": {
         "subset": [
-            "BDNF_g",
-            "TrKB_g",
-            "SHC",
-            "SHCp",
-            "SHCp_deph"
+            {"name":"BDNF_g","alias":"BDNF_g"},{"name":"TrKB_g","alias":"TrKB_g"},{"name":"SHC","alias":"SHC"},{"name":"aSHC","alias":"SHCp"},{"name":"SHCp_deph","alias":"SHCp_deph"}
         ],
         "itemsToDelete": [
-            "TrKB_act_PLCg"
+            {"name":"eTrKB+PLCg","alias":"TrKB_act_PLCg"}
         ],
         "parameterChange": [
             {
-                "entity": "SHCp_deph",
+                "name": "SHCp_deph",
+                "alias": "SHCp_deph",
                 "field": "Kf",
                 "value": 0.2,
                 "units": "none"

@@ -23,28 +23,40 @@
     "Readouts": {
         "paramdata": [
             {
-                "entity": "MAPKpp_act_PLA2",
+                "entity" : {
+                    "name": "eMAPK+PLA2",
+                    "alias": "MAPKpp_act_PLA2"
+            },
                 "field": "kcat",
                 "units": "1/sec",
                 "value": 20,
                 "stderr": 50
             },
             {
-                "entity": "MAPK_4EBP_phospho",
+                "entity" : {
+                    "name": "eMAPK+eIF4EBPpq",
+                    "alias": "MAPK_4EBP_phospho"
+            },
                 "field": "kcat",
                 "units": "1/sec",
                 "value": 0.1,
                 "stderr": 0.05
             },
             {
-                "entity": "MAPKpp_act_PLA2",
+                "entity" : {
+                    "name": "eMAPK+PLA2",
+                    "alias": "MAPKpp_act_PLA2"
+            },
                 "field": "Km",
                 "units": "uM",
                 "value": 27,
                 "stderr": 5
             },
             {
-                "entity": "MAPK_4EBP_phospho",
+                "entity" : {
+                    "name": "eMAPK+eIF4EBPpq",
+                    "alias": "MAPK_4EBP_phospho"
+            },
                 "field": "Km",
                 "units": "uM",
                 "value": 20,
@@ -54,7 +66,7 @@
     },
     "Modifications": {
         "subset": [
-            "all"
+            {"name":"all"}
         ]
     }
 }
