@@ -1638,8 +1638,7 @@ def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile =
                         deferPlot = deferPlot )
             print( "Score= {:.4f} for {:34s} UserT= {:.1f}s, evalT= {:.3f}s".format( score, os.path.basename(exptFile), elapsedTime, sw.runtime ) )
             if not deferPlot:
-                pass
-	        #plt.show()
+                plt.show()
 
         '''
             plt.figure( "Main FindSim Plots" )
