@@ -11,7 +11,7 @@
             "year": 117,
             "figure": "Figure 13"
         },
-       "testModel": "models/loadhh.py",
+        "testModel": "models/loadhh.py",
         "testMap": "models/loadhh.json"
     },
     "Experiment": {
@@ -24,97 +24,47 @@
         {
             "timeUnits": "msec",
             "quantityUnits": "mV",
-            "entity": "soma",
+            "entity" : {
+                "name": "soma",
+                "alias": "soma"
+            },
             "field": "Vclamp",
             "data": [
-                [
-                    0,
-                    -65.0
-                ],
-                [
-                    10,
-                    -25.0
-                ],
-                [
-                    60,
-                    -65.0
-                ],
-                [
-                    100,
-                    -65.0
-                ]
+                [0,-65.0],
+                [10,-25.0],
+                [60,-65.0],
+                [100,-65.0]
             ]
         }
     ],
     "Readouts": {
         "timeUnits": "msec",
         "quantityUnits": "uA",
-        "entities": [
-            "soma"
-        ],
+        "entity" : {
+            "name": "soma",
+            "alias": "soma"
+            },
         "field": "current",
         "data": [
-            [
-                0,
-                0
-            ],
-            [
-                10,
-                0
-            ],
-            [
-                11,
-                -7.0
-            ],
-            [
-                12,
-                -2.0
-            ],
-            [
-                13,
-                1.5
-            ],
-            [
-                14,
-                3.2
-            ],
-            [
-                16,
-                6
-            ],
-            [
-                20,
-                6.9
-            ],
-            [
-                60,
-                6.9
-            ],
-            [
-                61,
-                1.2
-            ],
-            [
-                62,
-                0.8
-            ],
-            [
-                63,
-                0.6
-            ],
-            [
-                64,
-                0.4
-            ],
-            [
-                100,
-                0
-            ]
+            [0, 0],
+            [10, 0],
+            [11, -7.0],
+            [12, -2.0],
+            [13, 1.5],
+            [14, 3.2],
+            [16, 6],
+            [20, 6.9],
+            [60, 6.9],
+            [61, 1.2],
+            [62, 0.8],
+            [63, 0.6],
+            [64, 0.4],
+            [100, 0]
         ]
     },
     "Modifications": {
         "subset": [
-            "all"
+            {"name":"all"}
         ]
     }
 }

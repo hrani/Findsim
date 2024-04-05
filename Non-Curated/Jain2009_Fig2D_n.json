@@ -9,7 +9,7 @@
             "authors": "Yuen and Mobley",
             "journal": "Exp Neurol ",
             "year": 1999,
-            "figure": "Fig4"
+            "figure": "Fig3"
         },
         "testModel": "models/synSynth7.g",
         "testMap": "models/synSynth7_map.json"
@@ -37,25 +37,34 @@
         "settleTime": 300,
         "quantityUnits": "nM",
         "entity" : {
-            "name": "aSHC",
-            "alias": "SHCp"
+            "name": "PLCgp",
+            "alias": "PLCgp"
             },
         "field": "conc",
         "data": [
-            [0, 0, 0],
-            [1, 6.5, 0],
-            [2, 12.5, 0],
-            [3.8, 14, 0],
-            [7.5, 18, 0]
+            [0, 3, 0],
+            [1, 15, 0],
+            [2, 24, 0],
+            [3.8, 34, 0],
+            [7.5, 41, 0]
         ]
     },
     "Modifications": {
         "subset": [
-            {"name":"BDNF_g","alias":"BDNF_g"},{"name":"TrKB_g","alias":"TrKB_g"},{"name":"SHC","alias":"SHC"},{"name":"aSHC","alias":"SHCp"},{"name":"SHCp_deph","alias":"SHCp_deph"}
+            {"name":"BDNF_g","alias":"BDNF_g"},{"name":"TrKB_g","alias":"TrKB_g"},{"name":"PLCg_g","alias":"PLCg_g"}
         ],
         "itemsToDelete": [
-            {"name":"eTrKB+PLCg","alias":"TrKB_act_PLCg"}
+            {"name":"eTrKB+SHC","alias":"TrKB_act_SHC"},{"name":"Ca_PLCg","alias":"CaPLCg"},{"name":"aPLCg","alias":"CaPLCgp"},{"name":"Ca+PLCg","alias":"Ca_act_PLCg"},{"name":"Ca+PLCgp","alias":"Ca_act_PLCgp"},{"name":"dephosph_PLC_g","alias":"dephosph_PLC_g"}
         ],
-        "notes": "Jain2009_Fig2C"
+        "parameterChange": [
+            {
+                "name": "PLCg",
+                "alias": "PLCg",
+                "field": "concInit",
+                "value": 0.0001,
+                "units": "mM"
+            }
+        ],
+        "notes": "Jain2009_Fig2D"
     }
 }
