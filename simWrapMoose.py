@@ -360,7 +360,7 @@ class SimWrapMoose( SimWrap ):
             if len( foundObj ) > 0:
                 self.modelLookup[key] = foundObj
 
-    def loadModelFile( self, fname, modifyFunc, scaleParam, dumpFname, paramFname ): # modify arg is a func
+    def loadModelFile( self, fname, modifyFunc, scaleParam, dumpFname, paramFname, chemFile = None ): # modify arg is a func
     #This list holds the entire models Reac/Enz sub/prd list for reference
         if moose.exists( '/model' ):
             raise SimError( "loadModelFile: Model already exists" )
@@ -383,7 +383,7 @@ class SimWrapMoose( SimWrap ):
             spec = util.spec_from_file_location("mscript", fname )
             mscript = util.module_from_spec(spec)
             spec.loader.exec_module(mscript)
-            rdes = mscript.load()
+            rdes = mscript.load( scaleParam, chemFile )
             '''
             # Deprecated Python syntax from pre 3.3
             mscript = imp.load_source( "mscript", fname )
@@ -422,7 +422,11 @@ class SimWrapMoose( SimWrap ):
             moose.reinit()
         if len(dumpFname) > 2:
             if dumpFname[-2:] == '.g':
-                moose.writeKkit( self.modelId.path, dumpFname )
+                print( "writeKkit: {}, {}".format( self.modelId.path, dumpFname ) )
+                if file_extension == ".py": # Dump chem part of rdes model
+                    moose.writeKkit( '/model/chem', dumpFname )
+                else:   # Generic chem model optimization, dumping file.
+                    moose.writeKkit( self.modelId.path, dumpFname )
             elif len(dumpFname) > 4 and dumpFname[-4:] == '.xml':
                 moose.writeSBML( self.modelId.path, dumpFname )
             else:
