@@ -1132,12 +1132,12 @@ def parseAndRun( model, stims, readouts, getPlots = False ):
     if readouts.useNormalization and readouts.normMode == "each":
         if len( [ y for y in readouts.ratioData if abs(y) < eps ] ) > 0:
             #raise SimError( "runDoser: Normalization1 failed due to zero denominator: " + str( min( readouts.ratioData ) ) )
-            print( "runDoser: Normalization1 failed due to zero denominator: " + str( min( readouts.ratioData ) ) )
+            print( "parseAndRun: Normalization1 denom={:.3g} for {}.{}".format(min( readouts.ratioData ), readouts.entities[0], readouts.field ) )
         readouts.simData = [ x/y if abs(y)>= eps else 0.0 for x, y in zip(readouts.simData, readouts.ratioData) ]
     else:
         if abs(norm) < eps:
             #raise SimError( "runDoser: Normalization2 failed due to zero denominator: " + str( norm ) )
-            print( "runDoser: Normalization2 failed due to zero denominator: " + str( norm ) )
+            print( "parseAndRun: Normalization2 denom={:.3g} for {}.{}".format( norm, readouts.entities[0], readouts.field ) )
             readouts.simData = [0.0] *len( readouts.simData )
         else:
             readouts.simData = [ x/norm for x in readouts.simData ]
@@ -1481,7 +1481,7 @@ def main():
         simWrap = "HillTau"
     innerMain( args.script, scoreFunc = args.scoreFunc, modelFile = args.model, mapFile = args.map, dumpFname = args.dump_subset, paramFname = args.tweak_param_file, hidePlot = args.hide_plot, hideSubplots = args.hide_subplots, bigFont = args.big_font, optimizeElec = args.optimize_elec, silent = not args.verbose, scaleParam = args.scale_param, settleTime = args.settle_time, tabulateOutput = args.tabulate_output, ignoreMissingObj = args.ignore_missing_obj, simWrap = simWrap, plots = args.plot, generate = args.generate, solver = args.solver )
 
-def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile = "", dumpFname = "", paramFname = "", hidePlot = False, hideSubplots = True, bigFont = False, labelPos = None, deferPlot = False, optimizeElec=True, silent = False, scaleParam=[], settleTime = 0, settleDict = {}, tabulateOutput = False, ignoreMissingObj = False, simWrap = "", plots = None, generate = None, solver = "gsl" ):
+def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile = "", chemFile = None, dumpFname = "", paramFname = "", hidePlot = False, hideSubplots = True, bigFont = False, labelPos = None, deferPlot = False, optimizeElec=False, silent = False, scaleParam=[], settleTime = 0, settleDict = {}, tabulateOutput = False, ignoreMissingObj = False, simWrap = "", plots = None, generate = None, solver = "gsl" ):
     ''' If *settleTime* > 0, then we need to return a dict of concs of
     all variable pools in the chem model obtained after loading in model, 
     applying all modifications, and running for specified settle time.\n
@@ -1533,7 +1533,7 @@ def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile =
         sw.deleteSimulation()
         #print( "SCALE PARAM = ", [p for p in scaleParam] )
         #sys.stdout.flush()
-        sw.loadModelFile( model.fileName, model.modify, scaleParam, dumpFname, paramFname )
+        sw.loadModelFile( model.fileName, model.modify, scaleParam, dumpFname, paramFname, chemFile )
 
         if expt.exptType == 'directparameter':
             t0 = time.time()
