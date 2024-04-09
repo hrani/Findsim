@@ -511,9 +511,10 @@ class Readout:
             ylabel = pp.ylabel
             if self.field in ( Readout.epspFields + Readout.epscFields ):
                 if self.field in Readout.epspFields:
-                    plt.ylabel( '{} Vm ({})'.format( self.entities[0], tsUnits ) )
+                    plt.ylabel( '{} Vm ({})'.format( self.entities['name'], tsUnits ) )
                 else:
-                    plt.ylabel( '{} holding current ({})'.format( self.entities[0], tsUnits ) )
+                    print("516 ",self.entities['name'])
+                    plt.ylabel( '{} holding current ({})'.format( self.entities['name'], tsUnits ) )
 
                 plt.figure( self.field ) # Do the EPSP in a new figure
                 if self.useNormalization:

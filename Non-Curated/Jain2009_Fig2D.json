@@ -11,7 +11,7 @@
             "year": 1999,
             "figure": "Fig3"
         },
-       "testModel": "models/synSynth7.g",
+        "testModel": "models/synSynth7.g",
         "testMap": "models/synSynth7_map.json"
     },
     "Experiment": {
@@ -25,7 +25,10 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "nM",
-            "entity": "BDNF",
+            "entity" : {
+                "name": "BDNF",
+                "alias": "BDNF"
+            },
             "field": "conc"
         }
     ],
@@ -33,55 +36,30 @@
         "timeUnits": "sec",
         "settleTime": 300,
         "quantityUnits": "nM",
-        "entities": [
-            "PLCgp"
-        ],
+        "entity" : {
+            "name": "PLCgp",
+            "alias": "PLCgp"
+            },
         "field": "conc",
         "data": [
-            [
-                0,
-                3,
-                0
-            ],
-            [
-                1,
-                15,
-                0
-            ],
-            [
-                2,
-                24,
-                0
-            ],
-            [
-                3.8,
-                34,
-                0
-            ],
-            [
-                7.5,
-                41,
-                0
-            ]
+            [0, 3, 0],
+            [1, 15, 0],
+            [2, 24, 0],
+            [3.8, 34, 0],
+            [7.5, 41, 0]
         ]
     },
     "Modifications": {
         "subset": [
-            "BDNF_g",
-            "TrKB_g",
-            "PLCg_g"
+            {"name":"BDNF_g","alias":"BDNF_g"},{"name":"TrKB_g","alias":"TrKB_g"},{"name":"PLCg_g","alias":"PLCg_g"}
         ],
         "itemsToDelete": [
-            "TrKB_act_SHC",
-            "CaPLCg",
-            "CaPLCgp",
-            "Ca_act_PLCg",
-            "Ca_act_PLCgp",
-            "dephosph_PLC_g"
+            {"name":"eTrKB+SHC","alias":"TrKB_act_SHC"},{"name":"Ca_PLCg","alias":"CaPLCg"},{"name":"aPLCg","alias":"CaPLCgp"},{"name":"Ca+PLCg","alias":"Ca_act_PLCg"},{"name":"Ca+PLCgp","alias":"Ca_act_PLCgp"},{"name":"dephosph_PLC_g","alias":"dephosph_PLC_g"}
         ],
         "parameterChange": [
             {
-                "entity": "PLCg",
+                "name": "PLCg",
+                "alias": "PLCg",
                 "field": "concInit",
                 "value": 0.0001,
                 "units": "mM"

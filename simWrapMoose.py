@@ -478,7 +478,7 @@ class SimWrapMoose( SimWrap ):
 
     def buildVclamp( self, stim ):
         # Stim.entities should be the compartment name here.
-        comptPath = self.lookup( stim.entities[0] )[0]
+        comptPath = self.lookup( stim.entities[0]['name'] )[0]
         vclamp = moose.VClamp( comptPath + '/vclamp' )
         self.modelLookup['vclamp'] = [vclamp.path,]
         compt = moose.element(comptPath)
