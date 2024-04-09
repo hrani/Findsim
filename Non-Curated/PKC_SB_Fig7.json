@@ -25,21 +25,30 @@
             "timeUnits": "sec",
             "quantityUnits": "uM",
             "field": "conc",
-            "entity": "Ca",
+            "entity" : {
+                "name": "Ca",
+                "alias": "Ca"
+            },
             "value": 1.0
         },
         {
             "timeUnits": "sec",
             "quantityUnits": "uM",
             "field": "conc",
-            "entity": "DAG",
+            "entity" : {
+                "name": "DAG",
+                "alias": "DAG"
+            },
             "value": 50
         },
         {
             "timeUnits": "sec",
             "quantityUnits": "uM",
             "field": "conc",
-            "entity": "AA",
+            "entity" : {
+                "name": "AA",
+                "alias": "AA"
+            },
             "value": 50
         }
     ],
@@ -47,15 +56,16 @@
         "timeUnits": "sec",
         "settleTime": 15,
         "quantityUnits": "ratio",
-        "entities": [
-            "aPKC"
-        ],
+        "entity" : {
+            "name": "aPKC",
+            "alias": "aPKC"
+            },
         "field": "conc",
         "normalization": {
-            "time": 15,
-            "entities": [
-                "aPKC"
-            ],
+            "entity" : {
+                "name": "aPKC",
+                "alias": "aPKC"
+            },
             "sampling": "start"
         },
         "bardata": [
@@ -65,39 +75,27 @@
                 "stderr": 0
             },
             {
-                "stimulus": [
-                    "AA"
-                ],
+                "stimulus": ["AA"],
                 "value": 2.5,
                 "stderr": 0
             },
             {
-                "stimulus": [
-                    "DAG"
-                ],
+                "stimulus": ["DAG"],
                 "value": 3.0,
                 "stderr": 0
             },
             {
-                "stimulus": [
-                    "Ca"
-                ],
+                "stimulus": ["Ca"],
                 "value": 5.5,
                 "stderr": 0
             },
             {
-                "stimulus": [
-                    "Ca",
-                    "AA"
-                ],
+                "stimulus": ["Ca","AA"],
                 "value": 12.1,
                 "stderr": 0
             },
             {
-                "stimulus": [
-                    "Ca",
-                    "DAG"
-                ],
+                "stimulus": ["Ca","DAG"],
                 "value": 12.0,
                 "stderr": 0
             }
@@ -105,52 +103,50 @@
     },
     "Modifications": {
         "subset": [
-            "Ca",
-            "AA",
-            "PKC_g",
-            "DAG"
+            {"name":"Ca","alias":"Ca"},{"name":"AA","alias":"AA"},{"name":"PKC_g","alias":"PKC_g"},{"name":"DAG","alias":"DAG"}
         ],
         "itemsToDelete": [
-            "PKC_act_raf",
-            "PKC_inact_GAP",
-            "PKC_act_GEF",
-            "PKC_phosph_neurogranin",
-            "PKC_phosph_ng_CaM",
-            "phosph_AC2"
+            {"name":"ePKC+craf","alias":"PKC_act_raf"},{"name":"PKC_inact_GAP","alias":"PKC_inact_GAP"},{"name":"PKC_act_GEF","alias":"PKC_act_GEF"},{"name":"PKC_phosph_neurogranin","alias":"PKC_phosph_neurogranin"},{"name":"PKC_phosph_ng_CaM","alias":"PKC_phosph_ng_CaM"},{"name":"phosph_AC2","alias":"phosph_AC2"}
         ],
         "parameterChange": [
             {
-                "entity": "Ca",
+                "name": "Ca",
+                "alias": "Ca",
                 "field": "concInit",
                 "value": 0.0001,
                 "units": "mM"
             },
             {
-                "entity": "Ca",
+                "name": "Ca",
+                "alias": "Ca",
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"
             },
             {
-                "entity": "DAG",
+                "name": "DAG",
+                "alias": "DAG",
                 "field": "concInit",
                 "value": 0,
                 "units": "mM"
             },
             {
-                "entity": "DAG",
+                "name": "DAG",
+                "alias": "DAG",
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"
             },
             {
-                "entity": "AA",
+                "name": "AA",
+                "alias": "AA",
                 "field": "concInit",
                 "value": 0,
                 "units": "mM"
             },
             {
-                "entity": "AA",
+                "name": "AA",
+                "alias": "AA",
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"

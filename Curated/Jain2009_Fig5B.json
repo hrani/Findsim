@@ -25,87 +25,55 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "nM",
-            "entity": "BDNF",
+            "entity" : {
+                "name": "BDNF",
+                "alias": "BDNF"
+            },
             "field": "conc",
             "data": [
-                [
-                    900,
-                    2
-                ]
+                [900,2]
             ]
         }
     ],
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "uM",
-        "entities": [
-            "aAKT"
-        ],
+        "entity" : {
+            "name": "aAKT",
+            "alias": "aAKT"
+            },
         "field": "conc",
         "data": [
-            [
-                900,
-                0.005,
-                0
-            ],
-            [
-                930,
-                0.01,
-                0
-            ],
-            [
-                1020,
-                0.082,
-                0
-            ],
-            [
-                1200,
-                0.078,
-                0
-            ],
-            [
-                1500,
-                0.072,
-                0
-            ],
-            [
-                2700,
-                0.069,
-                0
-            ]
+            [900, 0.005, 0],
+            [930, 0.01, 0],
+            [1020, 0.082, 0],
+            [1200, 0.078, 0],
+            [1500, 0.072, 0],
+            [2700, 0.069, 0]
         ]
     },
     "Modifications": {
         "subset": [
-            "Phosphatase_g",
-            "Ca_g",
-            "PLCg_g",
-            "Sos_g",
-            "BDNF_g",
-            "TrKB_g",
-            "AKT_g",
-            "PI3K_g",
-            "PIP2",
-            "PIP3",
-            "MAPK_g",
-            "Ras_g",
-            "PKC_g"
+            {"name":"Phosphatase_g","alias":"Phosphatase_g"},{"name":"Ca_g","alias":"Ca_g"},{"name":"PLCg_g","alias":"PLCg_g"},{"name":"Sos_g","alias":"Sos_g"},{"name":"BDNF_g","alias":"BDNF_g"},{"name":"TrKB_g","alias":"TrKB_g"},{"name":"AKT_g","alias":"AKT_g"},{"name":"PI3K_g","alias":"PI3K_g"},{"name":"PIP2","alias":"PIP2"},{"name":"PIP3","alias":"PIP3"},{"name":"MAPK_g","alias":"MAPK_g"},{"name":"Ras_g","alias":"Ras_g"},{"name":"PKC_g","alias":"PKC_g"}
         ],
         "parameterChange": [
             {
-                "entity": "AKT",
+                "name": "AKT",
+                "alias": "AKT",
                 "field": "concInit",
                 "value": 0.00017,
                 "units": "mM"
-                  },
+            },
             {
-                "entity": "BDNF",
+                "name": "BDNF",
+                "alias": "BDNF",
                 "field": "concInit",
                 "value": 0,
                 "units": "mM"
             },
             {
-                "entity": "SHCp_deph",
+                "name": "SHCp_deph",
+                "alias": "SHCp_deph",
                 "field": "Kf",
                 "value": 0.2,
                 "units": "none"

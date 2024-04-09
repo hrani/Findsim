@@ -24,78 +24,57 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "mM",
-            "entity": "S6KpT229",
+            "entity" : {
+                "name": "S6Kpqrs",
+                "alias": "S6KpT229"
+            },
             "field": "conc",
             "data": [
-                [
-                    0,
-                    1.67e-06
-                ]
+                [0,1.67e-06]
             ]
         }
     ],
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "nM",
-        "entities": [
-            "CaMKIIIp"
-        ],
+        "entity" : {
+            "name": "bCaMKIII",
+            "alias": "CaMKIIIp"
+            },
         "field": "conc",
         "data": [
-            [
-                60,
-                8,
-                0
-            ],
-            [
-                180,
-                12,
-                0
-            ],
-            [
-                300,
-                26,
-                0
-            ],
-            [
-                600,
-                25,
-                0
-            ],
-            [
-                900,
-                50,
-                0
-            ]
+            [60, 8, 0],
+            [180, 12, 0],
+            [300, 26, 0],
+            [600, 25, 0],
+            [900, 50, 0]
         ]
     },
     "Modifications": {
         "subset": [
-            "CaMKIII_g",
-            "S6K_g"
+            {"name":"CaMKIII_g","alias":"CaMKIII_g"},{"name":"S6K_g","alias":"S6K_g"}
         ],
         "itemsToDelete": [
-            "S6_phos",
-            "S6_phospho",
-            "S6_dephosph",
-            "CaMKIII_CaM_Ca4[0]/phospho",
-            "eEF2thr56_basal"
+            {"name":"eS6Kpqr+40S","alias":"S6_phos"},{"name":"eS6Kpqrs+40S","alias":"S6_phospho"},{"name":"CaMKIII_CaM_Ca4[0]/phospho","alias":"CaMKIII_CaM_Ca4[0]/phospho"},{"name":"eEF2thr56_basal","alias":"eEF2thr56_basal"}
         ],
         "parameterChange": [
             {
-                "entity": "bS6K",
+                "name": "bS6K",
+                "alias": "bS6K",
                 "field": "concInit",
                 "value": 0,
                 "units": "mM"
             },
             {
-                "entity": "CaMKIII",
+                "name": "CaMKIII",
+                "alias": "CaMKIII",
                 "field": "concInit",
                 "value": 6.8e-05,
                 "units": "mM"
             },
             {
-                "entity": "CaMKIII_deph",
+                "name": "CaMKIIIp_deph",
+                "alias": "CaMKIII_deph",
                 "field": "Kf",
                 "value": 0,
                 "units": "none"

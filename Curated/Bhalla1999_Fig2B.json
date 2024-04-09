@@ -25,158 +25,154 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "mM",
-            "entity": "EGF",
+            "entity" : {
+                "name": "EGF",
+                "alias": "EGF"
+            },
             "field": "conc",
             "data": [
-                [
-                    2100,
-                    0.0001
-                ]
+                [2100,0.0001]
             ]
         }
     ],
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "ratio",
-        "entities": [
-            "aMAPK"
-        ],
+        "entity" : {
+            "name": "aMAPK",
+            "alias": "aMAPK"
+            },
         "field": "conc",
         "normalization": {
-            "time": 2400,
-            "entities": [
-                "aMAPK"
-            ],
+            "entity" : {
+                "name": "aMAPK",
+                "alias": "aMAPK"
+            },
             "dose": 0,
-            "sampling": "presetTime"
+            "sampling": "presetTime",
+            "sampTime": 2400
         },
         "data": [
-            [
-                2100,
-                0.02,
-                0.06
-            ],
-            [
-                2400,
-                1,
-                0
-            ],
-            [
-                3900,
-                0.12,
-                0.17
-            ],
-            [
-                5700,
-                0.1,
-                0.1
-            ],
-            [
-                9300,
-                0.08,
-                0.08
-            ]
+            [2100, 0.02, 0.06],
+            [2400, 1, 0],
+            [3900, 0.12, 0.17],
+            [5700, 0.1, 0.1],
+            [9300, 0.08, 0.08]
         ]
     },
     "Modifications": {
         "subset": [
-            "EGFR_g",
-            "Sos_g",
-            "Ras_g",
-            "MAPK_g",
-            "Ca_g",
-            "PKC_g",
-            "Phosphatase_g",
-            "PLCg_g",
-            "PLCb_g",
-            "PLA2_g",
-            "PC",
-            "IP3",
-            "PIP2"
+            {"name":"EGFR_g","alias":"EGFR_g"},{"name":"Sos_g","alias":"Sos_g"},{"name":"Ras_g","alias":"Ras_g"},{"name":"MAPK_g","alias":"MAPK_g"},{"name":"Ca_g","alias":"Ca_g"},{"name":"PKC_g","alias":"PKC_g"},{"name":"Phosphatase_g","alias":"Phosphatase_g"},{"name":"PLCg_g","alias":"PLCg_g"},{"name":"PLCb_g","alias":"PLCb_g"},{"name":"PLA2_g","alias":"PLA2_g"},{"name":"PC","alias":"PC"},{"name":"IP3","alias":"IP3"},{"name":"PIP2","alias":"PIP2"}
         ],
         "itemsToDelete": [
-            "PP2A",
-            "phospho_AC2",
-            "GEF_Gprot_bg",
-            "bg_act_GEF",
-            "MEK_phospho",
-            "MEKp_phospho",
-            "mGluR_barr2_Raf",
-            "clus_S6K_phospho",
-            "MAPK_4EBPpp",
-            "MAPK_4EBP_phospho",
-            "Act_PLC_by_Gq",
-            "Inact_PLC_Gq",
-            "PLC_bind_Gq",
-            "PKC_phospho_ng",
-            "PKC_phospho_ng_CaM",
-            "PIP2_PLA2_act",
-            "PIP2_Ca_PLA2_act",
-            "CaM_bind_GEF",
-            "PI3K_bind_RasGTP",
-            "PIP2_phospho_Ras_GTP"
+            {"name":"PP2A","alias":"PP2A"},{"name":"phospho_AC2","alias":"phospho_AC2"},{"name":"GEF_Gprot_bg","alias":"GEF_Gprot_bg"},{"name":"bg_act_GEF","alias":"bg_act_GEF"},{"name":"ecraf+MAPKK","alias":"MEK_phospho"},{"name":"ecraf+MAPKKp","alias":"MEKp_phospho"},{"name":"craf1+barr2","alias":"mGluR_barr2_Raf"},{"name":"eMAPK+S6K","alias":"clus_S6K_phospho"},{"name":"eMAPK+4EBPpq","alias":"MAPK_4EBPpp"},{"name":"eMAPK+eIF4EBPpq","alias":"MAPK_4EBP_phospho"},{"name":"PLC_Ca+Gq","alias":"Act_PLC_by_Gq"},{"name":"Inact_PLC_Gq","alias":"Inact_PLC_Gq"},{"name":"PLC_bind_Gq","alias":"PLC_bind_Gq"},{"name":"PKC_phospho_ng","alias":"PKC_phospho_ng"},{"name":"PKC_phospho_ng_CaM","alias":"PKC_phospho_ng_CaM"},{"name":"PIP2_PLA2_act","alias":"PIP2_PLA2_act"},{"name":"PIP2_Ca_PLA2_act","alias":"PIP2_Ca_PLA2_act"},{"name":"CaMCa4+GEF","alias":"CaM_bind_GEF"},{"name":"PI3K+RasGTP","alias":"PI3K_bind_RasGTP"},{"name":"PIP2_phospho_Ras_GTP","alias":"PIP2_phospho_Ras_GTP"}
         ],
-         "parameterChange" :
-        [{"entity": "bPKCp",
-           "field": "concInit",
-           "value" :2.00E-05,
-           "units" :"mM"},
-           {"entity": "GAP",
-           "field": "concInit",
-           "value" :2.0E-5,
-           "units" :"mM"},
-           {"entity": "PIP2",
-           "field": "concInit",
-           "value" :0.007,
-           "units" :"mM"},
-           {"entity": "RasGDP",
-           "field": "concInit",
-           "value" :0.0005,
-           "units" :"mM"},
-           {"entity": "SHCp_deph",
-           "field": "Kf",
-           "value" :0.2,
-           "units" :"none"},
-           {"entity": "Ras_act_craf",
-           "field": "Kf",
-           "value" :9999.2668,
-           "units" :"none"},
-           {"entity": "PKC_act_raf",
-           "field": "Km",
-           "value" :0.02098,
-           "units" :"none"},
-           {"entity": "MKP1pY421_deph",
-           "field": "Km",
-           "value" :0.00734,
-           "units" :"none"},
-           {"entity": "MKP1pT424_deph",
-           "field": "Km",
-           "value" :0.00734,
-           "units" :"none"},
-           {"entity": "MKP1pT424_deph",
-           "field": "kcat",
-           "value" :4,
-           "units" :"none"},
-           {"entity": "MKP1pY421_deph",
-           "field": "kcat",
-           "value" :4,
-           "units" :"none"},
-           {"entity": "Rafp_RasGTP1",
-           "field": "kcat",
-           "value" :0.3,
-           "units" :"none"},
-           {"entity": "Rafp_RasGTP2",
-           "field": "kcat",
-           "value" :0.3,
-           "units" :"none"},
-           {"entity": "CaMGEF_actRas",
-           "field": "kcat",
-           "value" :0.02,
-           "units" :"none"},
-           {"entity": "Sos_Ras_GEF",
-           "field": "kcat",
-           "value" :0.2,
-           "units" :"none"}
+        "parameterChange": [
+            {
+                "name": "bPKC",
+                "alias": "bPKCp",
+                "field": "concInit",
+                "value": 2e-05,
+                "units": "mM"
+            },
+            {
+                "name": "GAP",
+                "alias": "GAP",
+                "field": "concInit",
+                "value": 2e-05,
+                "units": "mM"
+            },
+            {
+                "name": "PIP2",
+                "alias": "PIP2",
+                "field": "concInit",
+                "value": 0.007,
+                "units": "mM"
+            },
+            {
+                "name": "RasGDP",
+                "alias": "RasGDP",
+                "field": "concInit",
+                "value": 0.0005,
+                "units": "mM"
+            },
+            {
+                "name": "SHCp_deph",
+                "alias": "SHCp_deph",
+                "field": "Kf",
+                "value": 0.2,
+                "units": "none"
+            },
+            {
+                "name": "Ras+craf",
+                "alias": "Ras_act_craf",
+                "field": "Kf",
+                "value": 9999.2668,
+                "units": "none"
+            },
+            {
+                "name": "ePKC+craf",
+                "alias": "PKC_act_raf",
+                "field": "Km",
+                "value": 0.02098,
+                "units": "none"
+            },
+            {
+                "name": "eMKP1+MAPKp",
+                "alias": "MKP1pY421_deph",
+                "field": "Km",
+                "value": 0.00734,
+                "units": "none"
+            },
+            {
+                "name": "eMKP1+MAPKpq",
+                "alias": "MKP1pT424_deph",
+                "field": "Km",
+                "value": 0.00734,
+                "units": "none"
+            },
+            {
+                "name": "eMKP1+MAPKpq",
+                "alias": "MKP1pT424_deph",
+                "field": "kcat",
+                "value": 4,
+                "units": "none"
+            },
+            {
+                "name": "eMKP1+MAPKp",
+                "alias": "MKP1pY421_deph",
+                "field": "kcat",
+                "value": 4,
+                "units": "none"
+            },
+            {
+                "name": "eRas+MAPKK1",
+                "alias": "Rafp_RasGTP1",
+                "field": "kcat",
+                "value": 0.3,
+                "units": "none"
+            },
+            {
+                "name": "eRas+MAPKK2",
+                "alias": "Rafp_RasGTP2",
+                "field": "kcat",
+                "value": 0.3,
+                "units": "none"
+            },
+            {
+                "name": "eCaMGEF+Ras",
+                "alias": "CaMGEF_actRas",
+                "field": "kcat",
+                "value": 0.02,
+                "units": "none"
+            },
+            {
+                "name": "eSHCpSosGrb2+Ras",
+                "alias": "Sos_Ras_GEF",
+                "field": "kcat",
+                "value": 0.2,
+                "units": "none"
+            }
         ],
         "notes": "Bhalla1999_Fig2B"
     }

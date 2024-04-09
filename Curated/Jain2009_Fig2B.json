@@ -25,59 +25,38 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "nM",
-            "entity": "BDNF",
+            "entity" : {
+                "name": "BDNF",
+                "alias": "BDNF"
+            },
             "field": "conc",
             "data": [
-                [
-                    0,
-                    7.3
-                ]
+                [0,7.3]
             ]
         }
     ],
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "nM",
-        "entities": [
-            "BDNF_act_TrKB"
-        ],
+        "entity" : {
+            "name": "BDNF_act_TrKB",
+            "alias": "BDNF_act_TrKB"
+            },
         "field": "conc",
         "data": [
-            [
-                0,
-                0,
-                0
-            ],
-            [
-                30,
-                1,
-                0
-            ],
-            [
-                300,
-                14.5,
-                0
-            ],
-            [
-                900,
-                9.5,
-                0
-            ],
-            [
-                1800,
-                7.5,
-                0
-            ]
+            [0, 0, 0],
+            [30, 1, 0],
+            [300, 14.5, 0],
+            [900, 9.5, 0],
+            [1800, 7.5, 0]
         ]
     },
     "Modifications": {
         "subset": [
-            "BDNF_g",
-            "TrKB_g"
+            {"name":"BDNF_g","alias":"BDNF_g"},{"name":"TrKB_g","alias":"TrKB_g"}
         ],
         "itemsToDelete": [
-            "TrKB_act_PLCg",
-            "TrKB_act_SHC"
+            {"name":"eTrKB+PLCg","alias":"TrKB_act_PLCg"},{"name":"eTrKB+SHC","alias":"TrKB_act_SHC"}
         ],
         "notes": "Jain2009_Fig2B"
     }

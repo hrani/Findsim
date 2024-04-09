@@ -478,7 +478,7 @@ class SimWrapMoose( SimWrap ):
 
     def buildVclamp( self, stim ):
         # Stim.entities should be the compartment name here.
-        comptPath = self.lookup( stim.entities[0] )[0]
+        comptPath = self.lookup( stim.entities[0]['name'] )[0]
         vclamp = moose.VClamp( comptPath + '/vclamp' )
         self.modelLookup['vclamp'] = [vclamp.path,]
         compt = moose.element(comptPath)
@@ -571,7 +571,7 @@ class SimWrapMoose( SimWrap ):
         self.numMainPlots = 0
         for i in readouts:
             readoutElmPaths = []
-            for j in i.entities:
+            for j in [i.entities['name']]:
                 readoutElmPaths.extend( self.lookup(j) )
             for elmPath in readoutElmPaths:
                 ######Creating tables for plotting for full run #############
@@ -650,7 +650,7 @@ class SimWrapMoose( SimWrap ):
     def deliverStim( self, qe ):
         field = qe.entry.field
         #field = model.fieldLookup[s.field]
-        for name in qe.entry.entities:
+        for name in [qe.entry.entities[0]['name']]:
             if not name in self.modelLookup:
                 raise SimError( "simWrapMoose::deliverStim: entity '{}' not found, check object map".format( name ) )
             elmPaths = self.modelLookup[name]

@@ -24,111 +24,53 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "uM",
-            "entity": "Glutamate",
+            "entity" : {
+                "name": "Glutamate",
+                "alias": "Glutamate"
+            },
             "field": "conc",
             "data": [
-                [
-                    300,
-                    0.0
-                ]
+                [300,0.0]
             ]
         }
     ],
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "ratio",
-        "entities": [
-            "beta2ARp"
-        ],
+        "entity" : {
+            "name": "beta2ARp",
+            "alias": "beta2ARp"
+            },
         "field": "conc",
         "normalization": {
-            "time": 300,
-            "entities": [
-                "beta2ARp"
-            ],
-            "dose": 0,
+            "entity" : {
+                "name": "beta2ARp",
+                "alias": "beta2ARp"
+            },
             "sampling": "start"
         },
         "data": [
-            [
-                300,
-                1,
-                0
-            ],
-            [
-                600,
-                0.95,
-                0
-            ],
-            [
-                900,
-                0.82,
-                0
-            ],
-            [
-                1200,
-                0.65,
-                0
-            ],
-            [
-                1500,
-                0.52,
-                0
-            ],
-            [
-                2100,
-                0.32,
-                0
-            ],
-            [
-                3900,
-                0.09,
-                0
-            ],
-            [
-                5700,
-                0.01,
-                0
-            ]
+            [300, 1, 0],
+            [600, 0.95, 0],
+            [900, 0.82, 0],
+            [1200, 0.65, 0],
+            [1500, 0.52, 0],
+            [2100, 0.32, 0],
+            [3900, 0.09, 0],
+            [5700, 0.01, 0]
         ]
     },
     "Modifications": {
         "subset": [
-            "mGluR_g",
-            "barr2_g",
-            "PP2A",
-            "MAPK_g"
+            {"name":"mGluR_g","alias":"mGluR_g"},{"name":"barr2_g","alias":"barr2_g"},{"name":"PP2A","alias":"PP2A"},{"name":"MAPK_g","alias":"MAPK_g"}
         ],
         "itemsToDelete": [
-           "mGluR_Gq",
-            "Glu_mGluR_Gq",
-            "Glu_mGluR_bind_Gq",
-            "Glu_bind_mGluR_Gq",
-            "Act_Gq",
-            "mGluR_bind_Gq",
-            "clus_S6K_deph",
-            "S6K_dephosp",
-            "S6K_deph",
-            "AKTpS473_deph",
-            "AKTpT308_deph",
-            "eEF2p_deph",
-            "PP2A_4EBPpp",
-            "PP2A_4EBPp",
-            "PP2A_eIF4EBPpp",
-            "PP2A_eIF4EBPp",
-            "PP2A_dephos_I1",
-            "PP2A_dephos_PP1_Ip",
-            "clus_S6K_phospho",
-            "MAPKpp_feedback",
-            "MAPKpp_act_PLA2",
-            "Sos_phospho",
-            "MAPK_4EBPpp",
-            "MAPK_4EBP_phospho"
-           
+            {"name":"mGluR_Gq","alias":"mGluR_Gq"},{"name":"amGluR","alias":"Glu_mGluR_Gq"},{"name":"Glu_mGluR+Gq","alias":"Glu_mGluR_bind_Gq"},{"name":"Glu+mGluR_Gq","alias":"Glu_bind_mGluR_Gq"},{"name":"Act_Gq","alias":"Act_Gq"},{"name":"mGluR_bind_Gq","alias":"mGluR_bind_Gq"},{"name":"ePP2A+S6Kpq","alias":"clus_S6K_deph"},{"name":"ePP2A+S6Kpqrs","alias":"S6K_dephosp"},{"name":"ePP2A+S6Kpqr","alias":"S6K_deph"},{"name":"ePP2A+AKTpq","alias":"AKTpS473_deph"},{"name":"ePP2A+AKTp","alias":"AKTpT308_deph"},{"name":"ePP2A+eEF2p","alias":"eEF2p_deph"},{"name":"ePP2A+4EBPpqr","alias":"PP2A_4EBPpp"},{"name":"ePP2A+4EBPpq","alias":"PP2A_4EBPp"},{"name":"ePP2A+eIF4EBPpqr","alias":"PP2A_eIF4EBPpp"},{"name":"ePP2A+eIF4EBPpq","alias":"PP2A_eIF4EBPp"},{"name":"ePP2A+I1p","alias":"PP2A_dephos_I1"},{"name":"PP2A_dephos_PP1_Ip","alias":"PP2A_dephos_PP1_Ip"},{"name":"eMAPK+S6K","alias":"clus_S6K_phospho"},{"name":"eMAPK+crafp","alias":"MAPKpp_feedback"},{"name":"eMAPK+PLA2","alias":"MAPKpp_act_PLA2"},{"name":"Sos_phospho","alias":"Sos_phospho"},{"name":"eMAPK+4EBPpq","alias":"MAPK_4EBPpp"},{"name":"eMAPK+eIF4EBPpq","alias":"MAPK_4EBP_phospho"}
         ],
         "parameterChange": [
             {
-                "entity": "Glutamate",
+                "name": "Glutamate",
+                "alias": "Glutamate",
                 "field": "concInit",
                 "value": 0.1,
                 "units": "mM"

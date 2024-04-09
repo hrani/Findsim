@@ -25,94 +25,68 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "mM",
-            "entity": "eIF4E",
+            "entity" : {
+                "name": "eIF4E",
+                "alias": "eIF4E"
+            },
             "field": "conc"
         }
     ],
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "uM",
-        "entities": [
-            "eIF4E_4EBP"
-        ],
+        "entity" : {
+            "name": "eIF4E_4EBP",
+            "alias": "eIF4E_4EBP"
+            },
         "field": "conc",
         "data": [
-            [
-                0,
-                0,
-                0
-            ],
-            [
-                13,
-                50,
-                0
-            ],
-            [
-                20,
-                80,
-                0
-            ],
-            [
-                25,
-                95,
-                0
-            ],
-            [
-                35,
-                115,
-                0
-            ],
-            [
-                50,
-                123,
-                0
-            ],
-            [
-                80,
-                131,
-                0
-            ],
-            [
-                100,
-                132,
-                0
-            ]
+            [0, 0, 0],
+            [13, 50, 0],
+            [20, 80, 0],
+            [25, 95, 0],
+            [35, 115, 0],
+            [50, 123, 0],
+            [80, 131, 0],
+            [100, 132, 0]
         ]
     },
     "Modifications": {
         "subset": [
-            "eIF4E_4EBP",
-            "eIF4E_bind_BP2",
-            "4EBP",
-            "eIF4E"
+            {"name":"eIF4E_4EBP","alias":"eIF4E_4EBP"},{"name":"eIF4E+4EBP","alias":"eIF4E_bind_BP2"},{"name":"4EBP","alias":"4EBP"},{"name":"eIF4E","alias":"eIF4E"}
         ],
         "parameterChange": [
             {
-                "entity": "eIF4E",
+                "name": "eIF4E",
+                "alias": "eIF4E",
                 "field": "concInit",
                 "value": 0.0016,
                 "units": "mM"
             },
             {
-                "entity": "eIF4E",
+                "name": "eIF4E",
+                "alias": "eIF4E",
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"
             },
             {
-                "entity": "eIF4E_4EBP",
+                "name": "eIF4E_4EBP",
+                "alias": "eIF4E_4EBP",
                 "field": "concInit",
                 "value": 0,
                 "units": "mM"
             },
             {
-                "entity": "4EBP",
+                "name": "4EBP",
+                "alias": "4EBP",
                 "field": "concInit",
                 "value": 0.00027,
                 "units": "mM"
             },
             {
-                "entity": "4EBP",
+                "name": "4EBP",
+                "alias": "4EBP",
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"
