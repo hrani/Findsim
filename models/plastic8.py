@@ -13,7 +13,8 @@
 ########################################################################
 import moose
 import rdesigneur as rd
-def load():
+def load( scaleParam, chemFile ):
+    diffusionLength = 2e-6  # 2 micron subdivisions
     rdes = rd.rdesigneur(
         elecDt = 50e-6,
         chemDt = 0.002,
@@ -35,7 +36,11 @@ def load():
         ],
         passiveDistrib = [['soma', 'CM', '0.01', 'Em', '-0.06']],
         spineDistrib = [['spine', '#dend#', '100e-6', '1e-6']],
-        chemDistrib = [['chem', '#', 'install', '1' ]],
+        chemDistrib = [
+            ['PSD', '#', 'psd', '1', "DEND" ],
+            ['SPINE', '#', 'spine', '1', "DEND" ],
+            ['DEND', '#', 'dend', '1', diffusionLength ],
+        ],
         chanDistrib = [
             ['Na', 'soma', 'Gbar', '300' ],
             ['K_DR', 'soma', 'Gbar', '250' ],
@@ -45,8 +50,8 @@ def load():
             ['Ca', 'soma', 'Gbar', '40' ]
         ],
         adaptorList = [
-            [ 'psd/tot_phospho_R', 'n', 'glu', 'modulation', 1.0, 0.3 ],
-            [ 'Ca_conc', 'Ca', 'psd/Ca', 'conc', 0.00008, 3 ]
+            [ 'PSD/tot_phospho_R', 'n', 'glu', 'modulation', 1.0, 0.3 ],
+            [ 'Ca_conc', 'Ca', 'PSD/Ca', 'conc', 0.00008, 3 ]
         ],
         # Syn wt is 0.2, specified in 2nd argument
         stimList = [['head#', '0.2','glu', 'periodicsyn', '0']],

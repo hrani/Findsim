@@ -1,7 +1,7 @@
 //genesis
 // kkit Version 11 flat dumpfile
  
-// Saved on Sun Sep  9 15:10:34 2018
+// Saved on Wed Apr 10 20:04:09 2024
  
 include kkit {argv 1}
  
@@ -107,9 +107,9 @@ call /kinetics/geometry[10]/notes LOAD \
 ""
 simundump group /kinetics/PSD 0 20 black x 0 0 "" PSD defaultfile.g 0 0 0 27 \
   12 0
-simundump text /kinetics/PSD/notes 0 ""
+simundump text /kinetics/PSD/notes 0 Compartment
 call /kinetics/PSD/notes LOAD \
-""
+"Compartment"
 simundump group /kinetics/PSD/PP1_PSD 1 yellow 20 x 0 0 "" PP1_PSD \
   /home2/bhalla/scripts/modules/PP1_PSD_0.g 0 \
   62a600ae10e53f567e47decb4f2b6488 0 12 27 0
@@ -634,9 +634,9 @@ call /kinetics/PSD/PP2A/PP2A-dephosph-I1/notes LOAD \
 ""
 simundump group /kinetics/DEND 0 13 black x 0 0 "" DEND defaultfile.g 0 0 0 \
   11 -30 0
-simundump text /kinetics/DEND/notes 0 ""
+simundump text /kinetics/DEND/notes 0 Compartment
 call /kinetics/DEND/notes LOAD \
-""
+"Compartment"
 simundump kreac /kinetics/DEND/degrade_Y 1 0.8 0.02 "" white 40 -7 -28 0
 simundump text /kinetics/DEND/degrade_Y/notes 0 ""
 call /kinetics/DEND/degrade_Y/notes LOAD \
@@ -1059,9 +1059,9 @@ call /kinetics/DEND/PKC_convert/notes LOAD \
 ""
 simundump group /kinetics/SPINE 0 5 black x 0 0 "" SPINE defaultfile.g 0 0 0 \
   29 -23 0
-simundump text /kinetics/SPINE/notes 0 ""
+simundump text /kinetics/SPINE/notes 0 Compartment
 call /kinetics/SPINE/notes LOAD \
-""
+"Compartment"
 simundump group /kinetics/SPINE/CaM 1 blue 5 x 0 0 "" defaultfile \
   defaultfile.g 0 fbb0ff81553508bc01f3dd51428742fb 0 33 2 0
 simundump text /kinetics/SPINE/CaM/notes 0 ""
@@ -2123,6 +2123,8 @@ addmsg /kinetics/SPINE/CaN_BULK/Ca_bind_CaN /kinetics/SPINE/Ca REAC A B
 enddump
 // End of dump
 
+call /kinetics/PSD/notes LOAD \
+"Compartment"
 call /kinetics/PSD/PP1_PSD/PP1-active/notes LOAD \
 "Cohen et al Meth Enz 159 390-408 is main source of info" \
 "conc  = 1.8 uM"
@@ -2247,6 +2249,8 @@ call /kinetics/PSD/PP2A/PP2A-dephosph-I1/notes LOAD \
 "the review by Cohen in Ann Rev Biochem 1989." \
 "For now, lets halve Km. k1 was 3.3e-6, now 6.6e-6" \
 ""
+call /kinetics/DEND/notes LOAD \
+"Compartment"
 call /kinetics/DEND/Ca_input/notes LOAD \
 "Note that the buffered level here is 10x smaller than " \
 "resting Ca, because of the dynamics of the Ca_stim."
@@ -2318,6 +2322,8 @@ call /kinetics/DEND/PP2A/notes LOAD \
 call /kinetics/DEND/Ca_activate_PKC/notes LOAD \
 "Rates from DOQCS" \
 ""
+call /kinetics/SPINE/notes LOAD \
+"Compartment"
 call /kinetics/SPINE/CaM/CaM/notes LOAD \
 "There is a LOT of this in the cell: upto 1% of total protein mass. (Alberts et al)" \
 "Say 25 uM. Meyer et al Science 256 1199-1202 1992 refer to studies saying" \
