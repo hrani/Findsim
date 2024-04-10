@@ -25,7 +25,10 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "uM",
-            "entity": "Ca",
+            "entity" : {
+                "name": "Ca",
+                "alias": "Ca"
+            },
             "field": "conc"
         }
     ],
@@ -33,15 +36,16 @@
         "timeUnits": "sec",
         "settleTime": 300,
         "quantityUnits": "ratio",
-        "entities": [
-            "CaPLCgp"
-        ],
+        "entity" : {
+            "name": "aPLCg",
+            "alias": "CaPLCgp"
+            },
         "field": "conc",
         "normalization": {
-            "time": 300,
-            "entities": [
-                "CaPLCgp"
-            ],
+            "entity" : {
+                "name": "aPLCg",
+                "alias": "CaPLCgp"
+            },
             "dose": 100,
             "sampling": "dose"
         },
@@ -50,75 +54,41 @@
             "useYlog": false
         },
         "data": [
-            [
-                0,
-                0,
-                0
-            ],
-            [
-                0.032,
-                0.15,
-                0
-            ],
-            [
-                0.065,
-                0.2,
-                0
-            ],
-            [
-                0.1,
-                0.25,
-                0
-            ],
-            [
-                0.21,
-                0.35,
-                0
-            ],
-            [
-                0.43,
-                0.6,
-                0
-            ],
-            [
-                1,
-                0.9,
-                0
-            ],
-            [
-                100,
-                1,
-                0
-            ]
+            [0, 0, 0],
+            [0.032, 0.15, 0],
+            [0.065, 0.2, 0],
+            [0.1, 0.25, 0],
+            [0.21, 0.35, 0],
+            [0.43, 0.6, 0],
+            [1, 0.9, 0],
+            [100, 1, 0]
         ]
     },
     "Modifications": {
         "subset": [
-            "Ca_g",
-            "PLCg_g",
-            "EGFR_g"
+            {"name":"Ca_g","alias":"Ca_g"},{"name":"PLCg_g","alias":"PLCg_g"},{"name":"EGFR_g","alias":"EGFR_g"}
         ],
         "itemsToDelete": [
-            "PLCgp_deph",
-            "EGFR_act_SHC",
-            "CaPLCg_PIP2hydr",
-            "CaPLCgp_PIP2hydr"
+            {"name":"PLCgp_deph","alias":"PLCgp_deph"},{"name":"eEGFR+SHC","alias":"EGFR_act_SHC"},{"name":"eCaPLCg+PIP2","alias":"CaPLCg_PIP2hydr"},{"name":"eCaPLCgp+PIP2","alias":"CaPLCgp_PIP2hydr"}
         ],
         "parameterChange": [
             {
-                "entity": "EGF",
+                "name": "EGF",
+                "alias": "EGF",
                 "field": "concInit",
                 "value": 0.0001,
                 "units": "mM"
             },
             {
-                "entity": "PLCg",
+                "name": "PLCg",
+                "alias": "PLCg",
                 "field": "concInit",
                 "value": 0.00082,
                 "units": "mM"
             },
             {
-                "entity": "Ca",
+                "name": "Ca",
+                "alias": "Ca",
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"

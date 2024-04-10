@@ -5,13 +5,13 @@
         "email": "bhalla@ncbs.res.in",
         "source": {
             "sourceType": "inhouse",
-            "PMID": 0,
+            "url": "www.ncbs.res.in",
             "authors": "None",
             "journal": "None. This is a purely fictional _experiment_ for the purposes of testing findSim",
             "year": 0,
             "figure": ""
         },
-         "testModel": "models/plastic8.py",
+        "testModel": "models/plastic8.py",
         "testMap": "models/plastic8.json"
     },
     "Experiment": {
@@ -24,77 +24,50 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "Hz",
-            "entity": "synInput",
+            "entity" : {
+                "name": "synInput",
+                "alias": "synInput"
+            },
             "field": "rate",
             "data": [
-                [
-                    0,
-                    0
-                ],
-                [
-                    10,
-                    100
-                ],
-                [
-                    11,
-                    0
-                ]
+                [0,0],
+                [10,100],
+                [11,0]
             ]
         },
         {
             "timeUnits": "sec",
             "quantityUnits": "ratio",
-            "entity": "synapse",
+            "entity" : {
+                "name": "synapse",
+                "alias": "synapse"
+            },
             "field": "weight",
             "data": [
-                [
-                    0,
-                    0.4
-                ],
-                [
-                    10,
-                    1
-                ],
-                [
-                    11,
-                    0.4
-                ]
+                [0,0.4],
+                [10,1],
+                [11,0.4]
             ]
         }
     ],
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "mV",
-        "entities": [
-            "soma"
-        ],
+        "entity" : {
+            "name": "soma",
+            "alias": "soma"
+            },
         "field": "EPSP_peak",
         "data": [
-            [
-                4,
-                2,
-                0
-            ],
-            [
-                8,
-                2,
-                0
-            ],
-            [
-                15,
-                11,
-                0
-            ],
-            [
-                20,
-                19,
-                0
-            ]
+            [4, 2, 0],
+            [8, 2, 0],
+            [15, 11, 0],
+            [20, 19, 0]
         ]
     },
     "Modifications": {
         "subset": [
-            "all"
+            {"name":"all"}
         ]
     }
 }

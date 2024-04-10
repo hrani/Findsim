@@ -23,28 +23,40 @@
     "Readouts": {
         "paramdata": [
             {
-                "entity": "RecLigandBinding",
+                "entity" : {
+                    "name": "RecLigandBinding",
+                    "alias": "RecLigandBinding"
+            },
                 "field": "tau",
                 "units": "sec",
                 "value": 0.04,
                 "stderr": 0.01
             },
             {
-                "entity": "makeTernary",
+                "entity" : {
+                    "name": "makeTernary",
+                    "alias": "makeTernary"
+            },
                 "field": "tau",
                 "units": "sec",
                 "value": 160,
                 "stderr": 50
             },
             {
-                "entity": "RecLigandBinding",
+                "entity" : {
+                    "name": "RecLigandBinding",
+                    "alias": "RecLigandBinding"
+            },
                 "field": "Kd",
                 "units": "uM",
                 "value": 0.6,
                 "stderr": 0.1
             },
             {
-                "entity": "makeTernary",
+                "entity" : {
+                    "name": "makeTernary",
+                    "alias": "makeTernary"
+            },
                 "field": "Kd",
                 "units": "uM",
                 "value": 0.015,
@@ -54,11 +66,10 @@
     },
     "Modifications": {
         "subset": [
-            "mGluR_g",
-            "G_GDP"
+            {"name":"mGluR_g","alias":"mGluR_g"},{"name":"Gq_GDP","alias":"G_GDP"}
         ],
         "itemsToDelete": [
-            "Activate_Gq"
+            {"name":"Activate_Gq","alias":"Activate_Gq"}
         ]
     }
 }

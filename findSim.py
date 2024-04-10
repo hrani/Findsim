@@ -166,7 +166,7 @@ class Stimulus:
         if "label" in s:
             self.label = s["label"]
         else:
-            self.label = self.entities[0]
+            self.label = self.entities[0]['name']
 
         if not self.data:
             if "value" in s:
@@ -221,7 +221,7 @@ class Stimulus:
         """Sanity check on all fields. First, check that all the entities
         named in experiment have counterparts in the model definition"""
         #self.minInterval()
-        for i in self.entities:
+        for i in [self.entities[0]['name']]:
             #if not i.encode( 'ascii' ) in modelLookup:
             if not i in modelLookup:
                 raise SimError( "Stim::configure: Error: object {} not defined in model lookup.".format( i ) )
@@ -254,7 +254,7 @@ class Readout:
             self.timeScale = convertTimeUnits[self.timeUnits]
             self.quantityUnits = ro["quantityUnits"]
             self.quantityScale = convertQuantityUnits[self.quantityUnits]
-            self.entities = ro["entities"]
+            self.entities = ro["entity"]
             self.field = ro["field"]
             self.settleTime = ro.get("settleTime")
             if not self.settleTime:
@@ -283,7 +283,7 @@ class Readout:
             self.ratioReferenceValue = 1.0
             if norm:
                 self.useNormalization = True
-                self.ratioReferenceEntities = norm["entities"]
+                self.ratioReferenceEntities = norm["entity"]
                 #if len( self.ratioReferenceEntities ) > 0 and not self.entities[0] in self.ratioReferenceEntities:
                 self.normMode = norm["sampling"]
                 if self.normMode == "none":
@@ -291,7 +291,7 @@ class Readout:
                 elif self.normMode == "start":
                     self.ratioReferenceTime = 0
                 elif self.normMode == "presetTime":
-                    self.ratioReferenceTime = norm["time"]
+                    self.ratioReferenceTime = norm["sampTime"]
                 elif self.normMode == "each":
                     self.ratioReferenceTime = -1
                 elif self.normMode == "dose":
@@ -361,14 +361,15 @@ class Readout:
     def configure( self, modelLookup ):
         """Sanity check on all fields. First, check that all the entities
         named in experiment have counterparts in the model definition"""
-        for i in self.entities:
+        for i in [self.entities['name']]:
             #if not i.encode("ascii") in modelLookup:
             if not i in modelLookup:
                 raise SimError( "Readout::configure: Error: object {} not defined in model lookup.".format( i ) )
-        for i in self.ratioReferenceEntities:
-            #if not i.encode("ascii") in modelLookup:
-            if not i in modelLookup:
-                raise SimError( "Readout::configure: Error: ratioReferenceEntity '{}' not defined in model lookup.".format( i ) )
+        if len(self.ratioReferenceEntities) > 0:
+            for i in [self.ratioReferenceEntities['name']]:
+                #if not i.encode("ascii") in modelLookup:
+                if not i in modelLookup:
+                    raise SimError( "Readout::configure: Error: ratioReferenceEntity '{}' not defined in model lookup.".format( i ) )
 
     def digestSteadyStateRun( self, ref, ret ):
         if self.useNormalization:
@@ -416,9 +417,9 @@ class Readout:
         else:
             separator = "."
         if not deferPlot:
-            plt.figure( self.entities[0] + "." + self.field )
+            plt.figure( self.entities['name'] + "." + self.field )
         if "doseresponse" in exptType:
-            for i in stims[0].entities:
+            for i in [stims[0].entities[0]['name']]:
                 #elms = modelLookup[i.encode("ascii")]
                 #elms = modelLookup.get( i.encode("ascii") )
                 elms = modelLookup.get( i )
@@ -429,7 +430,7 @@ class Readout:
                     pp.plotme( fname, pp.ylabel, joinSimPoints = True, 
                             labelPos = labelPos )
         elif "barchart" in exptType:
-            for i in self.entities:
+            for i in [self.entities['name']]:
                 #elms = modelLookup[i.encode("ascii")]
                 #elms = modelLookup.get( i.encode("ascii") )
                 elms = modelLookup.get( i )
@@ -510,9 +511,10 @@ class Readout:
             ylabel = pp.ylabel
             if self.field in ( Readout.epspFields + Readout.epscFields ):
                 if self.field in Readout.epspFields:
-                    plt.ylabel( '{} Vm ({})'.format( self.entities[0], tsUnits ) )
+                    plt.ylabel( '{} Vm ({})'.format( self.entities['name'], tsUnits ) )
                 else:
-                    plt.ylabel( '{} holding current ({})'.format( self.entities[0], tsUnits ) )
+                    print("516 ",self.entities['name'])
+                    plt.ylabel( '{} holding current ({})'.format( self.entities['name'], tsUnits ) )
 
                 plt.figure( self.field ) # Do the EPSP in a new figure
                 if self.useNormalization:
@@ -615,7 +617,7 @@ class Readout:
         score = 0.0
         numScore = 0.0
         for d in readouts.directParamData:
-            entity = d["entity"]
+            entity = d['entity']["name"]
             qs = convertQuantityUnits[ d["units"] ]
             expt = d["value"] * qs
             sem = d["stderr"] * qs
@@ -856,9 +858,13 @@ class Model:
         mod = findsim.get( "Modifications" )
         if mod:
             if "subset" in mod:
-                self.modelSubset = mod[ "subset" ]
+                #self.modelSubset = mod[ "subset" ]
+                for modelss in mod['subset']:
+                    self.modelSubset.append(modelss["name"])
             if "itemsToDelete" in mod:
-                self.itemsToDelete = mod[ "itemsToDelete" ]
+                #self.itemsToDelete = mod[ "itemsToDelete" ]
+                for modeli2D in mod['itemsToDelete']:
+                    self.itemsToDelete.append(modeli2D["name"])
             if "parameterChange" in mod:
                 self.parameterChange = mod[ "parameterChange" ]
 
@@ -916,7 +922,7 @@ class Model:
         #Function call for checking dangling Reaction/Enzyme/Function's
         sw.pruneDanglingObj( erSPlist)
         #print( "{}".format( self.parameterChange ) )
-        sw.changeParams( [ [i["entity"], i["field"], i["value"] * convertQuantityUnits[ i["units"] ] ] for i in self.parameterChange] )
+        sw.changeParams( [ [i["name"], i["field"], i["value"] * convertQuantityUnits[ i["units"] ] ] for i in self.parameterChange] )
 
             
 ##########################################################################
@@ -1017,7 +1023,7 @@ def doReadout( qe, model ):
         readout.plots, readout.plotDt, readout.numMainPlots = sw.fillPlots()
         doFepspReadout( readout )
     elif val == -1: # This is a special event to get RatioReferenceValue
-        readout.ratioReferenceValue = sw.sumFields( readout.ratioReferenceEntities, readout.field )
+        readout.ratioReferenceValue = sw.sumFields( [readout.ratioReferenceEntities['name']], readout.field )
     else:
         doEntityAndRatioReadout(readout, readout.field)
 
@@ -1062,12 +1068,12 @@ def doEpspReadout( readout ):
     readout.ratioData.append( v )
 
 def doEntityAndRatioReadout( readout, field ):
-    sim = sw.sumFields( readout.entities, field )
+    sim = sw.sumFields( [readout.entities['name']], field )
     # print( "Appending simData: ", len( readout.simData ), len( readout.ratioData ) )
     readout.simData.append( sim/readout.quantityScale )
     ratioReference = 1.0
     if readout.useNormalization:
-        ratioReference = sw.sumFields( readout.ratioReferenceEntities, field )
+        ratioReference = sw.sumFields( [readout.ratioReferenceEntities['name']], field )
     readout.ratioData.append( ratioReference )
 
 def processReadouts( readouts, scoringFormula ):
@@ -1179,12 +1185,18 @@ def runDoser( model, stim, readout ):
     responseList = []
     EPS = 1e-9
     for dose, response, sem in readout.data:
-        stimList.append( [ (stim.entities[0], stim.field, dose, stim.quantityScale), ] )
+        stimList.append( [ (stim.entities[0]['name'], stim.field, dose, stim.quantityScale), ] )
     if len( readout.ratioReferenceEntities ) > 0 and readout.ratioReferenceTime > EPS:
         # Add another entry for the global reference readout.
-        stimList.append( [ (stim.entities[0], stim.field, readout.ratioReferenceDose, stim.quantityScale), ] )
+        stimList.append( [ (stim.entities[0]['name'], stim.field, readout.ratioReferenceDose, stim.quantityScale), ] )
         #print( ">>>>>>>>> {} {} {} {}".format( stim.entities[0], stim.field, readout.ratioReferenceDose, stim.quantityScale ) )
-    responseList = [ readout.entities, readout.field, readout.ratioReferenceEntities, readout.field ]
+
+    if 'name' in readout.ratioReferenceEntities:
+        readout_ratioReferenceEntities = [readout.ratioReferenceEntities['name']]
+    else:
+        readout_ratioReferenceEntities = []
+    responseList = [ [readout.entities['name']], readout.field, readout_ratioReferenceEntities, readout.field ]
+    #responseList = [ readout.entities, readout.field, readout.ratioReferenceEntities, readout.field ]
     ret, ref = sw.steadyStateStims( stimList, responseList, isSeries = True, settleTime = readout.settleTime )
     if len( readout.ratioReferenceEntities ) > 0 and readout.ratioReferenceTime < EPS:
         # Special case where the extra entry is the value at reset time.
@@ -1211,13 +1223,17 @@ def runBarChart( model, stims, readout ):
     stimSource = {}
     for s in stims:
         #print ("SSSSSSSSSSSSS= {}".format( s.data ) )
-        stimEntry = ( s.entities[0], s.field, s.data[0][1], s.quantityScale )
+        stimEntry = ( s.entities[0]['name'], s.field, s.data[0][1], s.quantityScale )
         stimSource[ s.label ] = stimEntry
     for i in readout.bardata:
         stimLine = [ stimSource[ j ] for j in i["stimulus"] ]
         stimList.append( stimLine )
-
-    responseList = [ readout.entities, readout.field, readout.ratioReferenceEntities, readout.field ]
+    if 'name' in readout.ratioReferenceEntities:
+        readout_ratioReferenceEntities = [readout.ratioReferenceEntities['name']]
+    else:
+        readout_ratioReferenceEntities = ""
+    responseList = [ [readout.entities['name']], readout.field, readout_ratioReferenceEntities, readout.field ]
+    #responseList = [ readout.entities, readout.field, readout.ratioReferenceEntities, readout.field ]
     #print( responseList )
     # Some fuzzy normalization stuff
     if readout.useNormalization and readout.normMode == "presetTime":
@@ -1251,7 +1267,7 @@ def parseAndRunBarChart( model, stims, readouts ):
 class PlotPanel:
     def __init__( self, readout, exptType, xlabel = '', useBigFont=False ):
         self.name=[]
-        for i in readout.entities:
+        for i in [readout.entities['name']]:
             self.name.append( i )
         self.exptType = exptType
         self.useXlog = readout.useXlog
@@ -1311,6 +1327,7 @@ class PlotPanel:
         simBar = plt.bar(barpos + width/2, self.sim, width, color='IndianRed', label='Sim')
         plt.xlabel( "Stimulus combinations", fontsize=self.labelFontSize)
         plt.ylabel( self.ylabel, fontsize = self.labelFontSize )
+        scriptName = "FindSim comparison for: "+os.path.basename(scriptName)
         plt.title( scriptName, fontsize = self.labelFontSize )
         plt.legend( loc=labelPos, fontsize = self.tickFontSize, frameon=False )
         #ticklabels = [ i["stimulus"] for i in readout.bardata ] 
@@ -1383,7 +1400,7 @@ def saveTweakedModel( origFname, dumpFname, mapFile, scaleParam ):
     for i in scaleParam:
         sp.extend( i )
     localSW.deleteSimulation()
-    localSW.loadModelFile( origFname, None, sp, dumpFname, "")
+    localSW.loadModelFile( origFname, silentDummyModify, sp, dumpFname, "")
     localSW.deleteSimulation()
 
 def dummyModify( erSPlist, modelWarning ):
@@ -1541,7 +1558,7 @@ def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile =
             elapsedTime = time.time() - t0
 
             if not hidePlot:
-                print( "Score = {:.3f} for\t{}\tElapsed Time = {:.1f} s".format( score, os.path.basename(exptFile), elapsedTime ) )
+                print( "Score = {:.3f} for {} Elapsed Time = {:.1f} s".format( score, os.path.basename(exptFile), elapsedTime ) )
                 #plt.figure(1)
                 #readouts.displayPlots( exptFile, model._tempModelLookup, stims, hideSubplots, expt.exptType, bigFont = bigFont )
                 #plt.show()
@@ -1561,10 +1578,10 @@ def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile =
                 model._tempModelLookup['vclamp'] = [vpath,]
             elif i.field.lower() == 'inject':
                 readoutStim = i
-            if len(i.entities) > 0 and i.entities[0].lower() == 'syninput':
+            if len(i.entities) > 0 and i.entities[0]['name'].lower() == 'syninput':
                 readoutStim = i
             if expt.exptType in ['barchart', 'doseresponse'] and i.isBuffered:
-                sw.changeParams( [( i.entities[0], "isBuffered", 1 ),] )
+                sw.changeParams( [( i.entities[0]['name'], "isBuffered", 1 ),] )
         if readouts.field in Readout.postSynFields:
             readouts.stim = readoutStim 
         readoutVec = [readouts]

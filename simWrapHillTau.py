@@ -515,7 +515,7 @@ class SimWrapHillTau( SimWrap ):
         numPlots = 0
         self.numMainPlots = 0
         for i in readouts:
-            for j in i.entities:
+            for j in [i.entities['name']]:
                 if not j in self.modelLookup:
                     continue
                 objList = self.modelLookup[ j ]
@@ -535,7 +535,7 @@ class SimWrapHillTau( SimWrap ):
     
     def deliverStim( self, qe ):
         field = qe.entry.field
-        for name in qe.entry.entities:
+        for name in [qe.entry.entities[0]['name']]:
             #print( "in deliver stim setting {} to {}".format( name, field, qe.val ) )
             if not name in self.modelLookup:
                 raise SimError( "SimWrapHillTau::deliverStim: Entity {} not found".format( name ) )
