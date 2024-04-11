@@ -1,0 +1,66 @@
+{
+    "Metadata": {
+        "transcriber": "Upinder S. Bhalla",
+        "organization": "NCBS",
+        "email": "bhalla@ncbs.res.in",
+        "source": {
+            "sourceType": "paper",
+            "PMID": 10486198,
+            "authors": "Hodgkin and Huxley",
+            "journal": "Journal of Physiology ",
+            "year": 117,
+            "figure": "Figure 13"
+        },
+        "testModel": "models/loadhh.py",
+        "testMap": "models/loadhh.json"
+    },
+    "Experiment": {
+        "design": "TimeSeries",
+        "species": "",
+        "cellType": "giant axon",
+        "notes": ""
+    },
+    "Stimuli": [
+        {
+            "timeUnits": "msec",
+            "quantityUnits": "nA",
+            "entity" : {
+                "name": "soma",
+                "alias": "soma"
+            },
+            "field": "inject",
+            "data": [
+                [0,0],
+                [10,100],
+                [60,0]
+            ]
+        }
+    ],
+    "Readouts": {
+        "timeUnits": "msec",
+        "quantityUnits": "mV",
+        "entity" : {
+            "name": "soma",
+            "alias": "soma"
+            },
+        "field": "Vm",
+		"window": {"startt": -2, "endt": 5, "dt": 0.2, 
+				"operation": "oscPk"
+		},
+        "data": [
+            [10, 40],
+            [15, -75],
+            [25, 25],
+            [28, -75],
+            [35, 25],
+            [40, -75],
+            [50, 25],
+            [55, -75]
+        ]
+    },
+    "Modifications": {
+        "subset": [
+            {"name":"all"}
+        ]
+    }
+}

@@ -170,8 +170,8 @@
                                 "endt": {"type": "number"},
                                 "dt": {"type": "number"},
                                 "operation": {"type": "string",
-                                    "enum": ["min", "max", "mean", "sdev", "oscPk", "oscVal"]
-                                }
+                                    "enum": ["min", "max", "mean", "sdev", "oscPk", "oscVal"] },
+								"baseline": {"type": ["number","string"]}
                         },
                     "required": ["startt", "endt", "dt", "operation"],
                     "additionalProperties": false

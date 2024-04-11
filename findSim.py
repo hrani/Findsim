@@ -271,9 +271,19 @@ class Readout:
             self.generate = None
             self.generateFile = None
             if "window" in ro:
-                win = ro["window"]
-                self.window = [win["startt"], win["endt"], win["dt"], 
-                        win["operation"] ]
+                self.window = dict(ro["window"])
+                # Note baseline in the json is either a string or a number
+                # In the dict here it is only a number.
+                self.window["baseline"] = 0.0   
+                self.window["baselineOp"] = None
+                baseline = ro["window"].get("baseline")
+                if baseline in ["min", "max", "mean", "start", "end"]:
+                    self.window["baselineOp"] = baseline
+                elif not baseline == None:
+                    try:
+                        self.window["baseline"] = float( baseline )
+                    except ValueError:
+                        print( "Warning: window baselineOp = '{}' must either be a number or 'min', 'max' 'mean', 'start', 'end'.".format(baseline) )
             self.normMode = "none"
             norm = ro.get( "normalization" )
             self.useNormalization = False
@@ -660,49 +670,76 @@ class Readout:
         # condense the ratio and the simData terms as per specified op
         if self.window:
             w = self.window
-            assert( len( w ) == 4 )
-            assert( w[3] in ["min", "max", "mean", "sdev", "oscPk", "oscVal" ] )
-            numSamples = int( round( (w[1] - w[0]) / w[2] ) +1 ) 
+            assert( w["operation"] in ["min", "max", "mean", "sdev", "oscPk", "oscVal" ] )
+            numSamples = int( round( (w["endt"] - w["startt"]) / w["dt"] ) +1 ) 
             sd = []
             #print( "numSamples = {}, len = {}, ".format( numSamples, len( self.simData ) ) )
             for ii in range( len( self.simData ) // numSamples ):
                 sb = self.simData[ii*numSamples:(ii+1)*numSamples]
-                if w[3] == "min":
+                op = w["operation"]
+                if op == "min":
                     sd.append( min( sb ) )
-                elif w[3] == "oscVal" and (ii % 2) == 0: # start osc on val
+                elif op == "oscVal" and (ii % 2) == 0: # start osc on val
                     sd.append( min( sb ) )
-                elif w[3] == "oscPk" and (ii % 2) == 1:
+                elif op == "oscPk" and (ii % 2) == 1:
                     sd.append( min( sb ) )
-                elif w[3] == "max":
+                elif op == "max":
                     sd.append( max( sb ) )
-                elif w[3] == "oscPk" and (ii % 2) == 0: # start osc on pk
+                elif op == "oscPk" and (ii % 2) == 0: # start osc on pk
                     sd.append( max( sb ) )
-                elif w[3] == "oscVal" and (ii % 2) == 1:
+                elif op == "oscVal" and (ii % 2) == 1:
                     sd.append( max( sb ) )
-                elif w[3] == "mean":
+                elif op == "mean":
                     sd.append( np.mean( sb ) )
-                elif w[3] == "sdev":
+                elif op == "sdev":
                     sd.append( np.sdev( sb ) )
+            bl = w["baseline"]
+            if w["baselineOp"] == "min":
+                bl = min( self.simData )
+            elif w["baselineOp"] == "max":
+                bl = max( self.simData )
+            elif w["baselineOp"] == "mean":
+                bl = np.mean( self.simData )
+            elif w["baselineOp"] == "start":
+                bl = self.simData[0]
+            elif w["baselineOp"] == "end":
+                bl = self.simData[-1]
+            w["baseline"] = bl
+            sd = [ x - bl for x in sd ]
             if len( self.ratioData ) == len( self.simData ): 
                 rd = []
                 for ii in range( len( self.ratioData ) // numSamples ):
                     rb = self.ratioData[ii*numSamples:(ii+1)*numSamples]
-                    if w[3] == "min":
+                    op = w["operation"]
+                    if op == "min":
                         rd.append( min( rb ) )
-                    elif w[3] == "oscVal" and (ii % 2) == 0: # start on val
+                    elif op == "oscVal" and (ii % 2) == 0: # start on val
                         rd.append( min( rb ) )
-                    elif w[3] == "oscPk" and (ii % 2) == 1:
+                    elif op == "oscPk" and (ii % 2) == 1:
                         rd.append( min( rb ) )
-                    elif w[3] == "max":
+                    elif op == "max":
                         rd.append( max( rb ) )
-                    elif w[3] == "oscPk" and (ii % 2) == 0: # start on pk
+                    elif op == "oscPk" and (ii % 2) == 0: # start on pk
                         rd.append( max( rb ) )
-                    elif w[3] == "oscVal" and (ii % 2) == 1:
+                    elif op == "oscVal" and (ii % 2) == 1:
                         rd.append( max( rb ) )
-                    elif w[3] == "mean":
+                    elif op == "mean":
                         rd.append( np.mean( rb ) )
-                    elif w[3] == "sdev":
+                    elif op == "sdev":
                         rd.append( np.sdev( rb ) )
+                bl = w["baseline"]      # Use baseline computed above.
+                '''
+                if w["baselineOp"] == "min":
+                    bl = min( self.ratioData )
+                elif w["baselineOp"] == "max":
+                    bl = max( self.ratioData )
+                elif w["baselineOp"] == "mean":
+                    bl = np.mean( self.ratioData )
+                elif w["baselineOp"] == "start":
+                    bl = self.ratioData[0]
+                # w["baseline"] = bl    # do NOT change baseline here.
+                '''
+                rd = [ x - bl for x in rd ]
                 self.ratioData = rd
             self.simData = sd
 
@@ -971,6 +1008,7 @@ def putStimsInQ( q, stims, pauseHsolve ):
 def putReadoutsInQ( q, readouts, pauseHsolve ):
     stdError  = []
     plotLookup = {}
+
     if readouts.field in Readout.postSynFields:
         for j in range( len( readouts.data ) ):
             t = float( readouts.data[j][0] ) * readouts.timeScale
@@ -987,11 +1025,11 @@ def putReadoutsInQ( q, readouts, pauseHsolve ):
         for j in range( len( readouts.data ) ):
             t = float( readouts.data[j][0] ) * readouts.timeScale
             if readouts.window:
-                startt = t + readouts.window[0] * readouts.timeScale
-                endt = t + readouts.window[1] * readouts.timeScale
-                dt = readouts.window[2] * readouts.timeScale
+                startt = t + readouts.window["startt"] * readouts.timeScale
+                endt = t + readouts.window["endt"] * readouts.timeScale
+                dt = readouts.window["dt"] * readouts.timeScale
                 for t in np.arange( startt, endt + 1e-8, dt ):
-                    t *= readouts.timeScale
+                    # t *= readouts.timeScale ##already scaled by timeScale
                     heapq.heappush( q, Qentry(t, readouts, j) )
             else:
                 heapq.heappush( q, Qentry(t, readouts, j) )
