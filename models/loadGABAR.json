@@ -1,0 +1,7 @@
+{
+    "all":["all"],
+    "soma":["elec/soma"],
+    "synInput":["elec/soma/gabaR/sh/synapse/synInput_rs"],
+    "synapse":["elec/soma/gabaR/sh/synapse"]
+}
+

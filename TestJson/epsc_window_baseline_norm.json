@@ -1,0 +1,82 @@
+{
+    "Metadata": {
+        "transcriber": "Upi",
+        "organization": "NCBS",
+        "email": "bhalla@ncbs.res.in",
+        "source": {
+            "sourceType": "other",
+            "doi": "0",
+            "authors": "None",
+            "journal": "None. This is a purely fictional _experiment_ for the purposes of testing findSim",
+            "year": 0,
+            "figure": ""
+        },
+        "testModel": "models/loadGABAR.py",
+        "testMap": "models/loadGABAR.json"
+    },
+    "Experiment": {
+        "design": "TimeSeries",
+        "species": "rat",
+        "cellType": "hippocampal CA1 pyramidal neuron",
+        "notes": "Test removal of baseline in voltage clamp peak estimate"
+    },
+    "Stimuli": [
+        {
+            "timeUnits": "sec",
+            "quantityUnits": "Hz",
+            "entity" : {
+                "name": "synInput",
+                "alias": "synInput"
+            },
+            "field": "rate",
+            "data": [
+                [0,5]
+            ]
+        },
+        {
+            "timeUnits": "sec",
+            "quantityUnits": "mV",
+            "entity" : {
+                "name": "soma",
+                "alias": "soma"
+            },
+            "field": "Vclamp",
+            "data": [
+                [0,-65.0],
+                [0.001,0.0],
+                [0.3,-65.0]
+            ]
+        }
+    ],
+    "Readouts": {
+        "timeUnits": "sec",
+        "quantityUnits": "ratio",
+        "entity" : {
+            "name": "vclamp",
+            "alias": "vclamp"
+            },
+        "field": "current",
+	    "window": {"startt": -0.010, "endt": 0.005, "dt": 0.0005,
+        	"operation": "max", "baseline": "min"
+        },
+        "normalization": {
+            "entity" : {
+                "name": "vclamp",
+                "alias": "vclamp"
+            },
+            "sampling": "start"
+        },
+        "data": [
+            [0.21, 1, 0],
+            [0.23, 1.2, 0],
+            [0.25, 1.2, 0],
+            [0.27, 1.2, 0],
+            [0.29, 1.2, 0]
+        ]
+    },
+    "Modifications": {
+        "subset": [
+            {"name":"all"}
+        ]
+    }
+}

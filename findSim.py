@@ -998,7 +998,7 @@ def putStimsInQ( q, stims, pauseHsolve ):
                 val = float(j[1]) * i.quantityScale
             t = float(j[0])*i.timeScale
             heapq.heappush( q, Qentry( t, i, val ) )
-            if isElec:
+            if isElec and pauseHsolve.optimizeElec:
                 # Below we tell the Hsolver to turn off or on for elec calcn.
                 if val == 0.0:
                     heapq.heappush( q, Qentry(t+pauseHsolve.stimSettle, pauseHsolve, 0) )
@@ -1135,6 +1135,9 @@ def parseAndRun( model, stims, readouts, getPlots = False ):
         qe = heapq.heappop( q )
         currt = sw.getCurrentTime()
         if ( qe.t > currt ):
+            print( "currt={:.4f}, qt={:.4f}".format( currt, qe.t) )
+            if qe.t > 1.5:
+                print( qe.entry )
             sw.advanceSimulation( qe.t - currt, doPlot = getPlots )
         if isinstance( qe.entry, Stimulus ):
             sw.deliverStim( qe )
@@ -1176,12 +1179,12 @@ def parseAndRun( model, stims, readouts, getPlots = False ):
     if readouts.useNormalization and readouts.normMode == "each":
         if len( [ y for y in readouts.ratioData if abs(y) < eps ] ) > 0:
             #raise SimError( "runDoser: Normalization1 failed due to zero denominator: " + str( min( readouts.ratioData ) ) )
-            print( "parseAndRun: Normalization1 denom={:.3g} for {}.{}".format(min( readouts.ratioData ), readouts.entities[0], readouts.field ) )
+            print( "parseAndRun: Normalization1 denom={:.3g} for {}.{}".format(min( readouts.ratioData ), readouts.entities, readouts.field ) )
         readouts.simData = [ x/y if abs(y)>= eps else 0.0 for x, y in zip(readouts.simData, readouts.ratioData) ]
     else:
         if abs(norm) < eps:
             #raise SimError( "runDoser: Normalization2 failed due to zero denominator: " + str( norm ) )
-            print( "parseAndRun: Normalization2 denom={:.3g} for {}.{}".format( norm, readouts.entities[0], readouts.field ) )
+            print( "parseAndRun: Normalization2 denom={:.3g} for {}.{}".format( norm, readouts.entities, readouts.field ) )
             readouts.simData = [0.0] *len( readouts.simData )
         else:
             readouts.simData = [ x/norm for x in readouts.simData ]
