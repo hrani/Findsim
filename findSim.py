@@ -1135,7 +1135,7 @@ def parseAndRun( model, stims, readouts, getPlots = False ):
         qe = heapq.heappop( q )
         currt = sw.getCurrentTime()
         if ( qe.t > currt ):
-            print( "currt={:.4f}, qt={:.4f}".format( currt, qe.t) )
+            #print( "currt={:.4f}, qt={:.4f}".format( currt, qe.t) )
             if qe.t > 1.5:
                 print( qe.entry )
             sw.advanceSimulation( qe.t - currt, doPlot = getPlots )
