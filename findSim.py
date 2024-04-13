@@ -959,7 +959,15 @@ class Model:
         #Function call for checking dangling Reaction/Enzyme/Function's
         sw.pruneDanglingObj( erSPlist)
         #print( "{}".format( self.parameterChange ) )
-        sw.changeParams( [ [i["entity"]["name"], i["field"], i["value"] * convertQuantityUnits[ i["units"] ] ] for i in self.parameterChange] )
+        # Hack here to deal with some intermediate models which don't
+        # use the "entity" keyword to specify which parameters to change.
+        if len( self.parameterChange ) > 0:
+            if self.parameterChange[0].get( "entity" ) != None:
+                sw.changeParams( [ [i["entity"]["name"], i["field"], i["value"] * convertQuantityUnits[ i["units"] ] ] for i in self.parameterChange] )
+            else: # This is a deprecated option.
+                sw.changeParams( [ [i["name"], i["field"], i["value"] * convertQuantityUnits[ i["units"] ] ] for i in self.parameterChange] )
+
+        #sw.changeParams( [ [i["entity"]["name"], i["field"], i["value"] * convertQuantityUnits[ i["units"] ] ] for i in self.parameterChange] )
 
             
 ##########################################################################
@@ -1136,8 +1144,6 @@ def parseAndRun( model, stims, readouts, getPlots = False ):
         currt = sw.getCurrentTime()
         if ( qe.t > currt ):
             #print( "currt={:.4f}, qt={:.4f}".format( currt, qe.t) )
-            if qe.t > 1.5:
-                print( qe.entry )
             sw.advanceSimulation( qe.t - currt, doPlot = getPlots )
         if isinstance( qe.entry, Stimulus ):
             sw.deliverStim( qe )
