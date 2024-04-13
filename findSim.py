@@ -959,7 +959,7 @@ class Model:
         #Function call for checking dangling Reaction/Enzyme/Function's
         sw.pruneDanglingObj( erSPlist)
         #print( "{}".format( self.parameterChange ) )
-        sw.changeParams( [ [i["name"], i["field"], i["value"] * convertQuantityUnits[ i["units"] ] ] for i in self.parameterChange] )
+        sw.changeParams( [ [i["entity"]["name"], i["field"], i["value"] * convertQuantityUnits[ i["units"] ] ] for i in self.parameterChange] )
 
             
 ##########################################################################
