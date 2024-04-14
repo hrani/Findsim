@@ -1,5 +1,4 @@
-{
-    "$schema": "http://json-schema.org/draft-07/schema#",
+{   "$schema": "http://json-schema.org/draft-07/schema#",
     "title" : "FindSim schema",
     "description" : "This is a schema for descriptors of experiments used by the FindSim package.",
     "definitions": {
@@ -20,7 +19,7 @@
         },
     "type": "object",
     "properties": {
-        "FileType": {"type": "string"},
+    	"ContentType":{"type": "string"},
         "Version": {"type": "string"},
         "Metadata": {
         "type": "object",
