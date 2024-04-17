@@ -116,6 +116,9 @@ class SimError( Exception ):
 def notTooSmall( x ):
     return (abs( x ) > 1e-13 ) # We have to handle sub-picoamp currents.
 
+def tooSmall( x ):
+    return (abs( x ) <= 1e-13 ) # We have to handle sub-picoamp currents.
+
 ##########################################################################
 
 class Experiment:
@@ -510,7 +513,7 @@ class Readout:
                 tconv = convertTimeUnits[ self.timeUnits ]
                 xpts = np.array( range( len( ypts ) ) ) * self.plotDt[idx] / tconv
                 if self.window:
-                    print( "scaling plot, baseline = ", self.window["baseline"], "scale = ", scale , self.normMode, self.ratioData )
+                    #print( "scaling plot, baseline = ", self.window["baseline"], "scale = ", scale , self.normMode, self.ratioData )
                     ypts = (ypts - self.window["baseline"])/scale
                 else:
                     ypts /= scale
@@ -1178,7 +1181,7 @@ def parseAndRun( model, stims, readouts, getPlots = False ):
         elif readouts.normMode == "presetTime":
             # The event Q has caused this special value to be recorded.
             norm = readouts.ratioReferenceValue
-            if norm < eps:
+            if tooSmall( norm ):
                 #raise SimError( "parseAndRun: normalizing to ratioReferenceValue which is zero" )
                 print( "Warning parseAndRun: normalizing to ratioReferenceValue which is zero. Using 1.0e12 instead so we compare expt to a near-zero output" )
                 norm = 1.0e12
@@ -1187,12 +1190,12 @@ def parseAndRun( model, stims, readouts, getPlots = False ):
             norm = readouts.ratioData[0]
 
     if readouts.useNormalization and readouts.normMode == "each":
-        if len( [ y for y in readouts.ratioData if abs(y) < eps ] ) > 0:
+        if len( [ y for y in readouts.ratioData if tooSmall(y) ] ) > 0:
             #raise SimError( "runDoser: Normalization1 failed due to zero denominator: " + str( min( readouts.ratioData ) ) )
             print( "parseAndRun: Normalization1 denom={:.3g} for {}.{}".format(min( readouts.ratioData ), readouts.entities, readouts.field ) )
-        readouts.simData = [ x/y if abs(y)>= eps else 0.0 for x, y in zip(readouts.simData, readouts.ratioData) ]
+        readouts.simData = [ x/y if notTooSmall(y) else 0.0 for x, y in zip(readouts.simData, readouts.ratioData) ]
     else:
-        if abs(norm) < eps:
+        if tooSmall(norm):
             #raise SimError( "runDoser: Normalization2 failed due to zero denominator: " + str( norm ) )
             print( "parseAndRun: Normalization2 denom={:.3g} for {}.{}".format( norm, readouts.entities, readouts.field ) )
             readouts.simData = [0.0] *len( readouts.simData )
