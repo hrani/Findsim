@@ -1,4 +1,5 @@
-{
+{   "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Upi",
         "organization": "NCBS",
@@ -24,10 +25,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "Hz",
-            "entity" : {
-                "name": "synInput",
-                "alias": "synInput"
-            },
+            "entity" : {"name": "synInput", "alias": "synInput"},
             "field": "rate",
             "data": [
                 [0,5]
@@ -36,10 +34,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "mV",
-            "entity" : {
-                "name": "soma",
-                "alias": "soma"
-            },
+            "entity" : {"name": "soma","alias": "soma"},
             "field": "Vclamp",
             "data": [
                 [0,-65.0],
@@ -51,19 +46,13 @@
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "ratio",
-        "entity" : {
-            "name": "vclamp",
-            "alias": "vclamp"
-            },
+        "entity" : {"name": "vclamp","alias": "vclamp"},
         "field": "current",
 	    "window": {"startt": -0.010, "endt": 0.005, "dt": 0.0005,
         	"operation": "max", "baseline": "min"
         },
         "normalization": {
-            "entity" : {
-                "name": "vclamp",
-                "alias": "vclamp"
-            },
+            "entity" : {"name": "vclamp","alias": "vclamp"},
             "sampling": "start"
         },
         "data": [

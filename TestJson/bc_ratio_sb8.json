@@ -1,4 +1,6 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Upi Bhalla",
         "organization": "National Centre for Biological Sciences",
@@ -25,30 +27,21 @@
             "timeUnits": "sec",
             "quantityUnits": "uM",
             "field": "conc",
-            "entity" : {
-                "name": "Ca",
-                "alias": "Ca"
-            },
+            "entity": {"name": "Ca","alias": "Ca"},
             "value": 1.0
         },
         {
             "timeUnits": "sec",
             "quantityUnits": "uM",
             "field": "conc",
-            "entity" : {
-                "name": "DAG",
-                "alias": "DAG"
-            },
+            "entity": {"name": "DAG","alias": "DAG"},
             "value": 100
         },
         {
             "timeUnits": "sec",
             "quantityUnits": "uM",
             "field": "conc",
-            "entity" : {
-                "name": "AA",
-                "alias": "AA"
-            },
+            "entity": {"name": "AA","alias": "AA"},
             "value": 50
         }
     ],
@@ -56,16 +49,10 @@
         "timeUnits": "sec",
         "settleTime": 150,
         "quantityUnits": "ratio",
-        "entity" : {
-            "name": "aPKC",
-            "alias": "aPKC"
-            },
+        "entity": { "name": "aPKC","alias": "aPKC"},
         "field": "conc",
         "normalization": {
-            "entity" : {
-                "name": "aPKC",
-                "alias": "aPKC"
-            },
+            "entity": {"name": "aPKC"},
             "sampling": "start"
         },
         "bardata": [
@@ -113,50 +100,43 @@
     },
     "Modifications": {
         "subset": [
-            {"name":"Ca","alias":"Ca"},{"name":"AA","alias":"AA"},{"name":"PKC_g","alias":"PKC_g"},{"name":"DAG","alias":"DAG"}
+            {"name": "Ca"},{"name": "AA"},{"name": "PKC_g"},{"name": "DAG"}
         ],
         "itemsToDelete": [
-            {"name":"ePKC+craf","alias":"PKC_act_raf"},{"name":"PKC_inact_GAP","alias":"PKC_inact_GAP"},{"name":"PKC_act_GEF","alias":"PKC_act_GEF"},{"name":"PKC_phosph_neurogranin","alias":"PKC_phosph_neurogranin"},{"name":"PKC_phosph_ng_CaM","alias":"PKC_phosph_ng_CaM"},{"name":"phosph_AC2","alias":"phosph_AC2"}
+            {"name": "ePKC+craf","alias": "PKC_act_raf"},
+            {"name": "PKC_inact_GAP"},
+            {"name": "PKC_act_GEF"},
+            {"name": "PKC_phosph_neurogranin"},
+            {"name": "PKC_phosph_ng_CaM"},
+            {"name": "phosph_AC2"}
         ],
         "parameterChange": [
-            {
-                "name": "Ca",
-                "alias": "Ca",
+            {   "entity": {"name": "Ca"},
                 "field": "concInit",
                 "value": 0.0001,
                 "units": "mM"
             },
-            {
-                "name": "Ca",
-                "alias": "Ca",
+            { 	"entity": {"name": "Ca"},
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"
             },
-            {
-                "name": "DAG",
-                "alias": "DAG",
+            {	"entity": {"name": "DAG"},
                 "field": "concInit",
                 "value": 0,
                 "units": "mM"
             },
-            {
-                "name": "DAG",
-                "alias": "DAG",
+            {	"entity": {"name": "DAG"},
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"
             },
-            {
-                "name": "AA",
-                "alias": "AA",
+            {	"entity": {"name": "AA"},
                 "field": "concInit",
                 "value": 0,
                 "units": "mM"
             },
-            {
-                "name": "AA",
-                "alias": "AA",
+            {	"entity": {"name": "AA"},
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"

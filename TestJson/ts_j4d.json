@@ -1,4 +1,6 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -24,20 +26,14 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "mM",
-            "entity" : {
-                "name": "eEF2p",
-                "alias": "eEF2p"
-            },
+            "entity": {"name": "eEF2p","alias": "eEF2p"},
             "field": "conc"
         }
     ],
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "nM",
-        "entity" : {
-            "name": "eEF2",
-            "alias": "eEF2"
-            },
+        "entity": {"name": "eEF2","alias": "eEF2"},
         "field": "conc",
         "data": [
             [0, 0, 0],
@@ -50,30 +46,35 @@
         ]
     },
     "Modifications": {
-        "subset": [
-            {"name":"PP2A","alias":"PP2A"},{"name":"eEF2","alias":"eEF2"},{"name":"eEF2p","alias":"eEF2p"}
+        "subset": [ 
+        	{"name": "PP2A"},{"name": "eEF2"},{"name": "eEF2p"}
         ],
         "itemsToDelete": [
-            {"name":"PP2A_dephospho_I1","alias":"PP2A_dephospho_I1"},{"name":"PP2A_dephospho_PP1_I_p","alias":"PP2A_dephospho_PP1_I_p"},{"name":"ePP2A+S6Kpq","alias":"clus_S6K_deph"},{"name":"ePP2A+S6Kpqrs","alias":"S6K_dephosp"},{"name":"ePP2A+S6Kpqr","alias":"S6K_deph"},{"name":"ePP2A+AKTpq","alias":"AKTpS473_deph"},{"name":"ePP2A+AKTp","alias":"AKTpT308_deph"},{"name":"ePP2A+4EBPpqr","alias":"PP2A_4EBPpp"},{"name":"ePP2A+4EBPpq","alias":"PP2A_4EBPp"},{"name":"ePP2A+eIF4EBPpqr","alias":"PP2A_eIF4EBPpp"},{"name":"ePP2A+eIF4EBPpq","alias":"PP2A_eIF4EBPp"},{"name":"mGluR_deph","alias":"mGluR_deph"}
+            {"name": "PP2A_dephospho_I1"},
+            {"name": "PP2A_dephospho_PP1_I_p"},
+            {"name": "ePP2A+S6Kpq","alias": "clus_S6K_deph"},
+            {"name": "ePP2A+S6Kpqrs","alias": "S6K_dephosp"},
+            {"name": "ePP2A+S6Kpqr","alias": "S6K_deph"},
+            {"name": "ePP2A+AKTpq","alias": "AKTpS473_deph"},
+            {"name": "ePP2A+AKTp","alias": "AKTpT308_deph"},
+            {"name": "ePP2A+4EBPpqr","alias": "PP2A_4EBPpp"},
+            {"name": "ePP2A+4EBPpq","alias": "PP2A_4EBPp"},
+            {"name": "ePP2A+eIF4EBPpqr","alias": "PP2A_eIF4EBPpp"},
+            {"name": "ePP2A+eIF4EBPpq","alias": "PP2A_eIF4EBPp"},
+            {"name": "mGluR_deph"}
         ],
         "parameterChange": [
-            {
-                "name": "PP2A",
-                "alias": "PP2A",
+            {	"entity": {"name": "PP2A","alias": "PP2A"},
                 "field": "concInit",
                 "value": 6.5e-07,
                 "units": "mM"
             },
-            {
-                "name": "eEF2",
-                "alias": "eEF2",
+            {	"entity": {"name": "eEF2"},
                 "field": "concInit",
                 "value": 0,
                 "units": "mM"
             },
-            {
-                "name": "eEF2p",
-                "alias": "eEF2p",
+            {	"entity": {"name": "eEF2p"},
                 "field": "concInit",
                 "value": 2.2e-05,
                 "units": "mM"

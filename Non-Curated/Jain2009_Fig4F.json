@@ -1,4 +1,5 @@
-{
+{   "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -24,10 +25,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "nM",
-            "entity" : {
-                "name": "aS6",
-                "alias": "S6p"
-            },
+            "entity" : {"name": "aS6","alias": "S6p"},
             "field": "conc"
         }
     ],
@@ -35,10 +33,7 @@
         "timeUnits": "sec",
         "settleTime": 2400,
         "quantityUnits": "nM",
-        "entity" : {
-            "name": "43S",
-            "alias": "43S"
-            },
+        "entity" : {"name": "43S","alias": "43S"},
         "field": "conc",
         "data": [
             [6.8, 3.61, 0],
@@ -53,16 +48,12 @@
             {"name":"Transl_init_g","alias":"Transl_init_g"},{"name":"_40S_g","alias":"40S_g"},{"name":"_43S_g","alias":"43S_g"}
         ],
         "parameterChange": [
-            {
-                "name": "M_clx",
-                "alias": "M_clx",
+            {   "entity":{"name": "M_clx","alias": "M_clx"},
                 "field": "concInit",
                 "value": 0.0015,
                 "units": "mM"
             },
-            {
-                "name": "Q_clx",
-                "alias": "Q_clx",
+            {   "entity":{"name": "Q_clx","alias": "Q_clx"},
                 "field": "concInit",
                 "value": 4.97e-05,
                 "units": "mM"

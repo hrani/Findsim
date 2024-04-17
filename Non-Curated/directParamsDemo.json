@@ -1,4 +1,5 @@
-{
+{   "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Upinder S. Bhalla",
         "organization": "NCBS",
@@ -22,41 +23,25 @@
     },
     "Readouts": {
         "paramdata": [
-            {
-                "entity" : {
-                    "name": "MAPK_phosph_PLA2",
-                    "alias": "MAPK_phosph_PLA2"
-            },
+            {   "entity" : {"name": "MAPK_phosph_PLA2","alias": "MAPK_phosph_PLA2"},
                 "field": "kcat",
                 "units": "1/sec",
                 "value": 20,
                 "stderr": 0
             },
-            {
-                "entity" : {
-                    "name": "MAPK_phosph_4EBP",
-                    "alias": "MAPK_phosph_4EBP"
-            },
+            {   "entity" : {"name": "MAPK_phosph_4EBP","alias": "MAPK_phosph_4EBP"},
                 "field": "kcat",
                 "units": "1/sec",
                 "value": 0.1,
                 "stderr": 0
             },
-            {
-                "entity" : {
-                    "name": "MAPK_phosph_PLA2",
-                    "alias": "MAPK_phosph_PLA2"
-            },
+            {	"entity" : {"name": "MAPK_phosph_PLA2","alias": "MAPK_phosph_PLA2"},
                 "field": "Km",
                 "units": "uM",
                 "value": 27,
                 "stderr": 0
             },
-            {
-                "entity" : {
-                    "name": "MAPK_phosph_4EBP",
-                    "alias": "MAPK_phosph_4EBP"
-            },
+            {	"entity" : {"name": "MAPK_phosph_4EBP","alias": "MAPK_phosph_4EBP"},
                 "field": "Km",
                 "units": "uM",
                 "value": 20,

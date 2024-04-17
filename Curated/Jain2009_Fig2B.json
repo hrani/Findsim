@@ -1,4 +1,6 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -25,10 +27,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "nM",
-            "entity" : {
-                "name": "BDNF",
-                "alias": "BDNF"
-            },
+            "entity": {"name": "BDNF","alias": "BDNF"},
             "field": "conc",
             "data": [
                 [0,7.3]
@@ -38,10 +37,7 @@
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "nM",
-        "entity" : {
-            "name": "BDNF_act_TrKB",
-            "alias": "BDNF_act_TrKB"
-            },
+        "entity": { "name": "BDNF_act_TrKB","alias": "BDNF_act_TrKB"},
         "field": "conc",
         "data": [
             [0, 0, 0],
@@ -53,10 +49,11 @@
     },
     "Modifications": {
         "subset": [
-            {"name":"BDNF_g","alias":"BDNF_g"},{"name":"TrKB_g","alias":"TrKB_g"}
+            {"name": "BDNF_g"},{"name": "TrKB_g"}
         ],
         "itemsToDelete": [
-            {"name":"eTrKB+PLCg","alias":"TrKB_act_PLCg"},{"name":"eTrKB+SHC","alias":"TrKB_act_SHC"}
+            {"name": "eTrKB+PLCg","alias": "TrKB_act_PLCg"},
+            {"name": "eTrKB+SHC", "alias": "TrKB_act_SHC" }
         ],
         "notes": "Jain2009_Fig2B"
     }

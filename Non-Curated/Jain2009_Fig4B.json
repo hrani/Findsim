@@ -1,4 +1,5 @@
-{
+{   "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -25,10 +26,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "M",
-            "entity" : {
-                "name": "CaMCa4",
-                "alias": "CaMCa4"
-            },
+            "entity" : {"name": "CaMCa4","alias": "CaMCa4"},
             "field": "conc"
         }
     ],
@@ -36,10 +34,7 @@
         "timeUnits": "sec",
         "settleTime": 300,
         "quantityUnits": "uM",
-        "entity" : {
-            "name": "eEF2p",
-            "alias": "eEF2p"
-            },
+        "entity" : {"name": "eEF2p", "alias": "eEF2p" },
         "field": "conc",
         "display": {
             "useXlog": true,
@@ -67,15 +62,12 @@
         ],
         "parameterChange": [
             {
-                "name": "eEF2",
-                "alias": "eEF2",
+                "entity":{"name": "eEF2","alias": "eEF2"},
                 "field": "concInit",
                 "value": 0.00054555,
                 "units": "mM"
             },
-            {
-                "name": "CaMKIII",
-                "alias": "CaMKIII",
+            {   "entity":{"name": "CaMKIII","alias": "CaMKIII"},
                 "field": "concInit",
                 "value": 3.65e-05,
                 "units": "mM"

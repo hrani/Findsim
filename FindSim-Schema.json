@@ -19,7 +19,7 @@
         },
     "type": "object",
     "properties": {
-    	"ContentType":{"type": "string"},
+    	"FileType":{"type": "string"},
         "Version": {"type": "string"},
         "Metadata": {
         "type": "object",
@@ -83,7 +83,8 @@
                         {"properties": {
                                 "sourceType": {"const": "other"},
                                 "doi": { "type": "string" },
-                                "year": {"type": "number"}
+                                "year": {"type": "number"},
+                                "journal":{"type":"string"}
                                   },
                                   "required": ["doi","year"]
                         }
@@ -306,7 +307,7 @@
                                 "enum": ["nM", "uM", "mM", "M", "#", "s", "sec", "1/s", "1/sec", "uV", "mV", "V", "pA", "nA", "uA", "none"]
                             }
                         },
-                        "required": [ "field", "value", "units"]
+                        "required": [ "entity","field", "value", "units"]
                     }
                 },
                 "notes": {"type": "string" }
@@ -319,7 +320,7 @@
             "additionalProperties": false
         }
     },
-    "required": ["Metadata", "Experiment", "Readouts"],
+    "required": ["FileType","Version","Metadata", "Experiment", "Readouts"],
     "additionalProperties": false,
     "if": {
         "required": [ "Experiment" ],

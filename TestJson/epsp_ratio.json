@@ -1,15 +1,14 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Upinder S. Bhalla",
         "organization": "NCBS",
         "email": "bhalla@ncbs.res.in",
         "source": {
             "sourceType": "other",
-            "doi": "www.ncbs.res.in",
-            "authors": "None",
             "year": 2019,
-            "PMID": 0,
-            "figure": "synthetic"
+            "doi": "0"
         },
         "testModel": "models/plastic8.py",
         "testMap": "models/plastic8.json"
@@ -25,10 +24,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "Hz",
-            "entity" : {
-                "name": "synInput",
-                "alias": "synInput"
-            },
+            "entity": {"name": "synInput","alias": "synInput"},
             "field": "rate",
             "data": [
                 [0,0],
@@ -39,10 +35,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "ratio",
-            "entity" : {
-                "name": "synapse",
-                "alias": "synapse"
-            },
+            "entity": {"name": "synapse","alias": "synapse"},
             "field": "weight",
             "data": [
                 [0,0.4],
@@ -54,17 +47,11 @@
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "ratio",
-        "entity" : {
-            "name": "soma",
-            "alias": "soma"
-            },
+        "entity": {"name": "soma","alias": "soma"},
         "field": "EPSP_peak",
         "normalization": {
             "sampling": "start",
-            "entity" : {
-                "name": "soma",
-                "alias": "soma"
-            }
+            "entity": {"name": "soma"}
         },
         "data": [
             [4, 1],
