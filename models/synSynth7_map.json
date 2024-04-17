@@ -2,6 +2,7 @@
     "all": [
         "all"
     ],
+    "beta2ARp":["Internal_mGluR_p","L.mGluR_p"],
     "PKC_g": [
         "PKC"
     ],
@@ -1099,5 +1100,7 @@
     ],
     "emTORC1+4EBP": [
         "TOR_4E_BP_p"
-    ]
+    ],
+    "emTORC1+4EBPhosho": [
+        "TOR_4E_BP_phospho"]
 }
