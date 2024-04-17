@@ -113,6 +113,9 @@ class SimError( Exception ):
         return repr( self.value )
 '''
 
+def notTooSmall( x ):
+    return (abs( x ) > 1e-13 ) # We have to handle sub-picoamp currents.
+
 ##########################################################################
 
 class Experiment:
@@ -480,15 +483,15 @@ class Readout:
                 if self.normMode == "presetTime":
                     scale = tsScale * self.ratioReferenceValue
                 elif len( self.ratioData ) > 0:
-                    if self.normMode == "start" and self.ratioData[0] > 0.0:
+                    if self.normMode == "start" and notTooSmall(self.ratioData[0]):
                         scale = tsScale * self.ratioData[0]
-                    elif self.normMode == "end" and self.ratioData[-1] > 0.0:
+                    elif self.normMode == "end" and notTooSmall(self.ratioData[-1]):
                         scale = tsScale * self.ratioData[-1]
-                    elif self.normMode == "min" and min(self.ratioData) > 0.0:
+                    elif self.normMode == "min" and notTooSmall( min(self.ratioData) ):
                         scale = tsScale * min( self.ratioData )
-                    elif self.normMode == "max" and max(self.ratioData) > 0.0:
+                    elif self.normMode == "max" and notTooSmall( max(self.ratioData) ):
                         scale = tsScale * max( self.ratioData )
-                    elif self.normMode == "each" and max(self.ratioData) > 0.0:
+                    elif self.normMode == "each" and notTooSmall( max(self.ratioData) ):
                         scale = tsScale * max( self.ratioData )
                         # For 'each' we don't realy have a good way to do
                         # timeseries. So just use the biggest.
@@ -506,7 +509,11 @@ class Readout:
             for idx, ypts in enumerate( self.plots ):
                 tconv = convertTimeUnits[ self.timeUnits ]
                 xpts = np.array( range( len( ypts ) ) ) * self.plotDt[idx] / tconv
-                ypts /= scale
+                if self.window:
+                    print( "scaling plot, baseline = ", self.window["baseline"], "scale = ", scale , self.normMode, self.ratioData )
+                    ypts = (ypts - self.window["baseline"])/scale
+                else:
+                    ypts /= scale
                 if not self.isPlotOnly :
                     sumvec += ypts
                     if not hideSubplots:
@@ -1014,9 +1021,6 @@ def putStimsInQ( q, stims, pauseHsolve ):
                     heapq.heappush( q, Qentry(t, pauseHsolve, 1) ) # Turn on hsolve
 
 def putReadoutsInQ( q, readouts, pauseHsolve ):
-    stdError  = []
-    plotLookup = {}
-
     if readouts.field in Readout.postSynFields:
         for j in range( len( readouts.data ) ):
             t = float( readouts.data[j][0] ) * readouts.timeScale
