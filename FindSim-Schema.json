@@ -19,7 +19,7 @@
         },
     "type": "object",
     "properties": {
-    	"ContentType":{"type": "string"},
+    	"FileType":{"type": "string"},
         "Version": {"type": "string"},
         "Metadata": {
         "type": "object",
