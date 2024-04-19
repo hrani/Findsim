@@ -136,6 +136,7 @@ class MooseScram ():
             ppath = pp.path[parentLen:].replace( "[0]", "" )
             if includeZero or pp.concInit > 0.0:
                 pd[ppath + ".concInit"] = pp.concInit
+            pd[ppath + ".isBuffered"] = pp.isBuffered
             objSet.add( ppath )
         for ee in enzs:
             epath = ee.path[ parentLen: ].replace( "[0]", "")
