@@ -1,4 +1,6 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -25,10 +27,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "nM",
-            "entity" : {
-                "name": "PDK1",
-                "alias": "PDK1"
-            },
+            "entity": {"name": "PDK1","alias": "PDK1"},
             "field": "conc",
             "data": [
                 [0,3.5]
@@ -38,10 +37,7 @@
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "nM",
-        "entity" : {
-            "name": "AKTp",
-            "alias": "AKTpT308"
-            },
+        "entity": {"name": "AKTp","alias": "AKTpT308"},
         "field": "conc",
         "data": [
             [0, 0, 0],
@@ -54,22 +50,32 @@
     },
     "Modifications": {
         "subset": [
-            {"name":"AKT_g","alias":"AKT_g"},{"name":"PI3K_g","alias":"PI3K_g"}
+            {"name": "AKT_g"},{"name": "PI3K_g"}
         ],
         "itemsToDelete": [
-            {"name":"PTEN","alias":"PTEN"},{"name":"RasGTP_PI3K","alias":"RasGTP_PI3K"},{"name":"SHCp_Grb2+Gab1","alias":"bind_Gab1"},{"name":"temp_PIP2","alias":"temp_PIP2"},{"name":"SHCpGrb2Gab1_PI3K","alias":"SHCpGrb2Gab1_PI3K"},{"name":"PI3K","alias":"PI3K"},{"name":"Gab1","alias":"Gab1"},{"name":"bPI3K","alias":"bPI3K"},{"name":"SHCpGrb2_Gab1","alias":"SHCpGrb2_Gab1"},{"name":"SHCpGrb2Gab1+PI3K","alias":"PI3K_act"},{"name":"bPI3K_act","alias":"bPI3K_act"},{"name":"PI3K+RasGTP","alias":"PI3K_bind_RasGTP"},{"name":"PIP3_PDK2","alias":"PIP3_PDK2"},{"name":"aAKT","alias":"AKTpT308S473"},{"name":"PDK1_act_S6K","alias":"PDK1_act_S6K"}
+            {"name": "PTEN"},
+            {"name": "RasGTP_PI3K"},
+            {"name": "SHCp_Grb2+Gab1","alias": "bind_Gab1"},
+            {"name": "temp_PIP2"},
+            {"name": "SHCpGrb2Gab1_PI3K"},
+            {"name": "PI3K"},
+            {"name": "Gab1"},
+            {"name": "bPI3K"},
+            {"name": "SHCpGrb2_Gab1"},
+            {"name": "SHCpGrb2Gab1+PI3K","alias": "PI3K_act"},
+            {"name": "bPI3K_act"},
+            {"name": "PI3K+RasGTP","alias": "PI3K_bind_RasGTP"},
+            {"name": "PIP3_PDK2"},
+            {"name": "aAKT","alias": "AKTpT308S473"},
+            {"name": "PDK1_act_S6K"}
         ],
         "parameterChange": [
-            {
-                "name": "PIP3",
-                "alias": "PIP3",
+            {   "entity": {"name": "PIP3","alias": "PIP3"},
                 "field": "concInit",
                 "value": 0.00025,
                 "units": "mM"
             },
-            {
-                "name": "AKT",
-                "alias": "AKT",
+            {   "entity": {"name": "AKT","alias": "AKT"},
                 "field": "concInit",
                 "value": 0.0005,
                 "units": "mM"

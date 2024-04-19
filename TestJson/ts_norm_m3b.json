@@ -1,4 +1,6 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -24,10 +26,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "uM",
-            "entity" : {
-                "name": "Glutamate",
-                "alias": "Glutamate"
-            },
+            "entity": {"name": "Glutamate", "alias": "Glutamate"},
             "field": "conc",
             "data": [
                 [0,100.0]
@@ -37,16 +36,10 @@
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "ratio",
-        "entity" : {
-            "name": "tot_surface_mGluR_with_barr2",
-            "alias": "tot_surface_mGluR_with_barr2"
-            },
+        "entity": {"name": "tot_surface_mGluR_with_barr2","alias": "tot_surface_mGluR_with_barr2"},
         "field": "conc",
         "normalization": {
-            "entity" : {
-                "name": "tot_surface_mGluR_with_barr2",
-                "alias": "tot_surface_mGluR_with_barr2"
-            },
+            "entity": {"name": "tot_surface_mGluR_with_barr2"},
             "sampling": "start"
         },
         "data": [
@@ -59,10 +52,27 @@
     },
     "Modifications": {
         "subset": [
-            {"name":"mGluR_g","alias":"mGluR_g"},{"name":"barr2_g","alias":"barr2_g"},{"name":"PP2A","alias":"PP2A"}
+            {"name": "mGluR_g"},{"name": "barr2_g"},{"name": "PP2A"}
         ],
         "itemsToDelete": [
-            {"name":"mGluR_Gq","alias":"mGluR_Gq"},{"name":"amGluR","alias":"Glu_mGluR_Gq"},{"name":"Glu_mGluR+Gq","alias":"Glu_mGluR_bind_Gq"},{"name":"Glu+mGluR_Gq","alias":"Glu_bind_mGluR_Gq"},{"name":"Act_Gq","alias":"Act_Gq"},{"name":"mGluR_bind_Gq","alias":"mGluR_bind_Gq"},{"name":"ePP2A+S6Kpq","alias":"clus_S6K_deph"},{"name":"ePP2A+S6Kpqrs","alias":"S6K_dephosp"},{"name":"ePP2A+S6Kpqr","alias":"S6K_deph"},{"name":"ePP2A+AKTpq","alias":"AKTpS473_deph"},{"name":"ePP2A+AKTp","alias":"AKTpT308_deph"},{"name":"ePP2A+eEF2p","alias":"eEF2p_deph"},{"name":"ePP2A+4EBPpqr","alias":"PP2A_4EBPpp"},{"name":"ePP2A+4EBPpq","alias":"PP2A_4EBPp"},{"name":"ePP2A+eIF4EBPpqr","alias":"PP2A_eIF4EBPpp"},{"name":"ePP2A+eIF4EBPpq","alias":"PP2A_eIF4EBPp"},{"name":"ePP2A+I1p","alias":"PP2A_dephos_I1"},{"name":"PP2A_dephos_PP1_Ip","alias":"PP2A_dephos_PP1_Ip"}
+            {"name": "mGluR_Gq"},
+            {"name": "amGluR","alias": "Glu_mGluR_Gq"},
+            {"name": "Glu_mGluR+Gq","alias": "Glu_mGluR_bind_Gq"},
+            {"name": "Glu+mGluR_Gq","alias": "Glu_bind_mGluR_Gq"},
+            {"name": "Act_Gq"},
+            {"name": "mGluR_bind_Gq"},
+            {"name": "ePP2A+S6Kpq","alias": "clus_S6K_deph"},
+            {"name": "ePP2A+S6Kpqrs","alias": "S6K_dephosp"},
+            {"name": "ePP2A+S6Kpqr","alias": "S6K_deph"},
+            {"name": "ePP2A+AKTpq","alias": "AKTpS473_deph"},
+            {"name": "ePP2A+AKTp","alias": "AKTpT308_deph"},
+            {"name": "ePP2A+eEF2p","alias": "eEF2p_deph"},
+            {"name": "ePP2A+4EBPpqr","alias": "PP2A_4EBPpp"},
+            {"name": "ePP2A+4EBPpq","alias": "PP2A_4EBPp"},
+            {"name": "ePP2A+eIF4EBPpqr","alias": "PP2A_eIF4EBPpp"},
+            {"name": "ePP2A+eIF4EBPpq","alias": "PP2A_eIF4EBPp"},
+            {"name": "ePP2A+I1p","alias": "PP2A_dephos_I1"},
+            {"name": "PP2A_dephos_PP1_Ip"}
         ]
     }
 }

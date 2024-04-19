@@ -1,4 +1,6 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -25,20 +27,14 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "mM",
-            "entity" : {
-                "name": "eIF4E",
-                "alias": "eIF4E"
-            },
+            "entity": {"name": "eIF4E","alias": "eIF4E"},
             "field": "conc"
         }
     ],
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "uM",
-        "entity" : {
-            "name": "eIF4E_4EBP",
-            "alias": "eIF4E_4EBP"
-            },
+        "entity": { "name": "eIF4E_4EBP","alias": "eIF4E_4EBP"},
         "field": "conc",
         "data": [
             [0, 0, 0],
@@ -53,40 +49,32 @@
     },
     "Modifications": {
         "subset": [
-            {"name":"eIF4E_4EBP","alias":"eIF4E_4EBP"},{"name":"eIF4E+4EBP","alias":"eIF4E_bind_BP2"},{"name":"4EBP","alias":"4EBP"},{"name":"eIF4E","alias":"eIF4E"}
+            {"name": "eIF4E_4EBP"},{"name": "eIF4E+4EBP","alias": "eIF4E_bind_BP2"},{"name": "4EBP"},{"name": "eIF4E"}
         ],
         "parameterChange": [
-            {
-                "name": "eIF4E",
-                "alias": "eIF4E",
-                "field": "concInit",
+            {"entity": {"name": "eIF4E"},"field": "concInit",
                 "value": 0.0016,
                 "units": "mM"
             },
-            {
-                "name": "eIF4E",
-                "alias": "eIF4E",
+            {"entity": {"name": "eIF4E"
+                },
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"
             },
-            {
-                "name": "eIF4E_4EBP",
-                "alias": "eIF4E_4EBP",
-                "field": "concInit",
+            {"entity": {"name": "eIF4E_4EBP"
+                },"field": "concInit",
                 "value": 0,
                 "units": "mM"
             },
-            {
-                "name": "4EBP",
-                "alias": "4EBP",
+            {"entity": {"name": "4EBP","alias": "4EBP"
+                },
                 "field": "concInit",
                 "value": 0.00027,
                 "units": "mM"
             },
-            {
-                "name": "4EBP",
-                "alias": "4EBP",
+            {"entity": {"name": "4EBP"
+                },
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"

@@ -1,4 +1,6 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Upinder S. Bhalla",
         "organization": "NCBS",
@@ -23,40 +25,28 @@
     "Readouts": {
         "paramdata": [
             {
-                "entity" : {
-                    "name": "eMAPK+PLA2",
-                    "alias": "MAPKpp_act_PLA2"
-            },
+                "entity": {"name": "eMAPK+PLA2","alias": "MAPKpp_act_PLA2"},
                 "field": "kcat",
                 "units": "1/sec",
                 "value": 20,
                 "stderr": 50
             },
             {
-                "entity" : {
-                    "name": "eMAPK+eIF4EBPpq",
-                    "alias": "MAPK_4EBP_phospho"
-            },
+                "entity": {"name": "eMAPK+eIF4EBPpq","alias": "MAPK_4EBP_phospho"},
                 "field": "kcat",
                 "units": "1/sec",
                 "value": 0.1,
                 "stderr": 0.05
             },
             {
-                "entity" : {
-                    "name": "eMAPK+PLA2",
-                    "alias": "MAPKpp_act_PLA2"
-            },
+                "entity": {"name": "eMAPK+PLA2"},
                 "field": "Km",
                 "units": "uM",
                 "value": 27,
                 "stderr": 5
             },
             {
-                "entity" : {
-                    "name": "eMAPK+eIF4EBPpq",
-                    "alias": "MAPK_4EBP_phospho"
-            },
+                "entity": {"name": "eMAPK+eIF4EBPpq"},
                 "field": "Km",
                 "units": "uM",
                 "value": 20,
@@ -66,7 +56,7 @@
     },
     "Modifications": {
         "subset": [
-            {"name":"all"}
+            {"name": "all"}
         ]
     }
 }

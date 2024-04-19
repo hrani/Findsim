@@ -1,4 +1,6 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -24,10 +26,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "uM",
-            "entity" : {
-                "name": "Ca",
-                "alias": "Ca"
-            },
+            "entity": {"name": "Ca","alias": "Ca"},
             "field": "conc"
         }
     ],
@@ -35,16 +34,10 @@
         "timeUnits": "sec",
         "settleTime": 300,
         "quantityUnits": "ratio",
-        "entity" : {
-            "name": "aPLCg",
-            "alias": "CaPLCgp"
-            },
+        "entity": {"name": "aPLCg","alias": "CaPLCgp"},
         "field": "conc",
         "normalization": {
-            "entity" : {
-                "name": "aPLCg",
-                "alias": "CaPLCgp"
-            },
+            "entity": {"name": "aPLCg"},
             "dose": 100,
             "sampling": "dose"
         },
@@ -65,29 +58,26 @@
     },
     "Modifications": {
         "subset": [
-            {"name":"Ca_g","alias":"Ca_g"},{"name":"PLCg_g","alias":"PLCg_g"},{"name":"EGFR_g","alias":"EGFR_g"}
+            {"name": "Ca_g"},{"name": "PLCg_g"},{"name": "EGFR_g"}
         ],
         "itemsToDelete": [
-            {"name":"PLCgp_deph","alias":"PLCgp_deph"},{"name":"eEGFR+SHC","alias":"EGFR_act_SHC"},{"name":"eCaPLCg+PIP2","alias":"CaPLCg_PIP2hydr"},{"name":"EGF_act_PLCg","alias":"EGF_act_PLCg"}
+            {"name": "PLCgp_deph"},
+            {"name": "eEGFR+SHC","alias": "EGFR_act_SHC"},
+            {"name": "eCaPLCg+PIP2","alias": "CaPLCg_PIP2hydr"},
+            {"name": "EGF_act_PLCg"}
         ],
         "parameterChange": [
-            {
-                "name": "EGF",
-                "alias": "EGF",
+            {   "entity": {"name": "EGF","alias": "EGF"},
                 "field": "concInit",
                 "value": 0.0001,
                 "units": "mM"
             },
-            {
-                "name": "PLCg",
-                "alias": "PLCg",
+            {	"entity": {"name": "PLCg","alias": "PLCg"},
                 "field": "concInit",
                 "value": 0.00082,
                 "units": "mM"
             },
-            {
-                "name": "Ca",
-                "alias": "Ca",
+            {	"entity": {"name": "Ca"},
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"

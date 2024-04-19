@@ -1,4 +1,5 @@
-{
+{   "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -25,10 +26,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "uM",
-            "entity" : {
-                "name": "Ca",
-                "alias": "Ca"
-            },
+            "entity" : {"name": "Ca","alias": "Ca"},
             "field": "conc"
         }
     ],
@@ -36,16 +34,10 @@
         "timeUnits": "sec",
         "settleTime": 300,
         "quantityUnits": "ratio",
-        "entity" : {
-            "name": "aPLCg",
-            "alias": "CaPLCgp"
-            },
+        "entity" : {"name": "aPLCg","alias": "CaPLCgp"},
         "field": "conc",
         "normalization": {
-            "entity" : {
-                "name": "aPLCg",
-                "alias": "CaPLCgp"
-            },
+            "entity" : {"name": "aPLCg","alias": "CaPLCgp"},
             "dose": 100,
             "sampling": "dose"
         },
@@ -73,22 +65,17 @@
         ],
         "parameterChange": [
             {
-                "name": "EGF",
-                "alias": "EGF",
+                "entity" : {"name": "EGF","alias": "EGF"},
                 "field": "concInit",
                 "value": 0.0001,
                 "units": "mM"
             },
-            {
-                "name": "PLCg",
-                "alias": "PLCg",
+            {	"entity" : {"name": "PLCg","alias": "PLCg"},
                 "field": "concInit",
                 "value": 0.00082,
                 "units": "mM"
             },
-            {
-                "name": "Ca",
-                "alias": "Ca",
+            {	"entity" : {"name": "Ca","alias": "Ca"},
                 "field": "isBuffered",
                 "value": 1,
                 "units": "none"

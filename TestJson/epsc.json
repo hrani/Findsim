@@ -1,15 +1,14 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Upi",
         "organization": "NCBS",
         "email": "bhalla@ncbs.res.in",
         "source": {
-            "sourceType": "other",
-            "doi": "0",
-            "authors": "None",
+            "sourceType": "inhouse",
             "journal": "None. This is a purely fictional _experiment_ for the purposes of testing findSim",
-            "year": 0,
-            "figure": ""
+            "url": "www.ncbs.res.in"
         },
         "testModel": "models/plastic8.py",
         "testMap": "models/plastic8.json"
@@ -24,7 +23,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "Hz",
-            "entity" : {
+            "entity": {
                 "name": "synInput",
                 "alias": "synInput"
             },
@@ -36,7 +35,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "ratio",
-            "entity" : {
+            "entity": {
                 "name": "synapse",
                 "alias": "synapse"
             },
@@ -49,7 +48,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "mV",
-            "entity" : {
+            "entity": {
                 "name": "soma",
                 "alias": "soma"
             },
@@ -64,10 +63,10 @@
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "pA",
-        "entity" : {
+        "entity": {
             "name": "vclamp",
             "alias": "vclamp"
-            },
+        },
         "field": "EPSC_peak",
         "data": [
             [4, 40, 0],
@@ -78,7 +77,9 @@
     },
     "Modifications": {
         "subset": [
-            {"name":"all"}
+            {
+                "name": "all"
+            }
         ]
     }
 }

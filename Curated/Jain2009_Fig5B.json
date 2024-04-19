@@ -1,4 +1,6 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -25,10 +27,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "nM",
-            "entity" : {
-                "name": "BDNF",
-                "alias": "BDNF"
-            },
+            "entity": {"name": "BDNF","alias": "BDNF"},
             "field": "conc",
             "data": [
                 [900,2]
@@ -38,10 +37,7 @@
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "uM",
-        "entity" : {
-            "name": "aAKT",
-            "alias": "aAKT"
-            },
+        "entity": {"name": "aAKT","alias": "aAKT"},
         "field": "conc",
         "data": [
             [900, 0.005, 0],
@@ -54,26 +50,19 @@
     },
     "Modifications": {
         "subset": [
-            {"name":"Phosphatase_g","alias":"Phosphatase_g"},{"name":"Ca_g","alias":"Ca_g"},{"name":"PLCg_g","alias":"PLCg_g"},{"name":"Sos_g","alias":"Sos_g"},{"name":"BDNF_g","alias":"BDNF_g"},{"name":"TrKB_g","alias":"TrKB_g"},{"name":"AKT_g","alias":"AKT_g"},{"name":"PI3K_g","alias":"PI3K_g"},{"name":"PIP2","alias":"PIP2"},{"name":"PIP3","alias":"PIP3"},{"name":"MAPK_g","alias":"MAPK_g"},{"name":"Ras_g","alias":"Ras_g"},{"name":"PKC_g","alias":"PKC_g"}
+            {"name": "Phosphatase_g"},{"name": "Ca_g"},{"name": "PLCg_g"},{"name": "Sos_g"},{"name": "BDNF_g"},{"name": "TrKB_g"},{"name": "AKT_g"}, {"name": "PI3K_g"},{"name": "PIP2"},{"name": "PIP3"},{"name": "MAPK_g"},{"name": "Ras_g"},{"name": "PKC_g"}
         ],
         "parameterChange": [
-            {
-                "name": "AKT",
-                "alias": "AKT",
+            {"entity": {"name": "AKT","alias": "AKT"},
                 "field": "concInit",
                 "value": 0.00017,
                 "units": "mM"
             },
-            {
-                "name": "BDNF",
-                "alias": "BDNF",
-                "field": "concInit",
+            {"entity": {"name": "BDNF"},"field": "concInit",
                 "value": 0,
                 "units": "mM"
             },
-            {
-                "name": "SHCp_deph",
-                "alias": "SHCp_deph",
+            {"entity": {"name": "SHCp_deph","alias": "SHCp_deph"},
                 "field": "Kf",
                 "value": 0.2,
                 "units": "none"

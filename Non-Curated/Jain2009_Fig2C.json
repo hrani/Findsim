@@ -1,4 +1,5 @@
-{
+{   "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -25,10 +26,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "nM",
-            "entity" : {
-                "name": "BDNF",
-                "alias": "BDNF"
-            },
+            "entity" : { "name": "BDNF", "alias": "BDNF" },
             "field": "conc"
         }
     ],
@@ -36,10 +34,7 @@
         "timeUnits": "sec",
         "settleTime": 300,
         "quantityUnits": "nM",
-        "entity" : {
-            "name": "aSHC",
-            "alias": "SHCp"
-            },
+        "entity" : {"name": "aSHC","alias": "SHCp"},
         "field": "conc",
         "data": [
             [0, 0, 0],

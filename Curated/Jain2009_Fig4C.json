@@ -1,4 +1,6 @@
 {
+    "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -24,9 +26,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "mM",
-            "entity" : {
-                "name": "S6Kpqrs",
-                "alias": "S6KpT229"
+            "entity": {"name": "S6Kpqrs","alias": "S6KpT229"
             },
             "field": "conc",
             "data": [
@@ -37,10 +37,10 @@
     "Readouts": {
         "timeUnits": "sec",
         "quantityUnits": "nM",
-        "entity" : {
+        "entity": {
             "name": "bCaMKIII",
             "alias": "CaMKIIIp"
-            },
+        },
         "field": "conc",
         "data": [
             [60, 8, 0],
@@ -52,29 +52,27 @@
     },
     "Modifications": {
         "subset": [
-            {"name":"CaMKIII_g","alias":"CaMKIII_g"},{"name":"S6K_g","alias":"S6K_g"}
+            {"name": "CaMKIII_g"},{"name": "S6K_g"}
         ],
         "itemsToDelete": [
-            {"name":"eS6Kpqr+40S","alias":"S6_phos"},{"name":"eS6Kpqrs+40S","alias":"S6_phospho"},{"name":"CaMKIII_CaM_Ca4[0]/phospho","alias":"CaMKIII_CaM_Ca4[0]/phospho"},{"name":"eEF2thr56_basal","alias":"eEF2thr56_basal"}
+            {"name": "eS6Kpqr+40S","alias": "S6_phos" },
+            {"name": "eS6Kpqrs+40S","alias": "S6_phospho"},
+            {"name": "S6_dephosph"},
+            {"name": "CaMKIII_CaM_Ca4[0]/phospho"},
+            {"name": "eEF2thr56_basal"}
         ],
         "parameterChange": [
-            {
-                "name": "bS6K",
-                "alias": "bS6K",
+            {   "entity": {"name": "bS6K","alias": "bS6K"},
                 "field": "concInit",
                 "value": 0,
                 "units": "mM"
             },
-            {
-                "name": "CaMKIII",
-                "alias": "CaMKIII",
+            {   "entity": {"name": "CaMKIII","alias": "CaMKIII"},
                 "field": "concInit",
                 "value": 6.8e-05,
                 "units": "mM"
             },
-            {
-                "name": "CaMKIIIp_deph",
-                "alias": "CaMKIII_deph",
+            {   "entity": {"name": "CaMKIIIp_deph","alias": "CaMKIII_deph"},
                 "field": "Kf",
                 "value": 0,
                 "units": "none"

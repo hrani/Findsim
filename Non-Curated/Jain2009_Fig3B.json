@@ -1,4 +1,5 @@
-{
+{   "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Nisha Ann Viswan",
         "organization": "NCBS",
@@ -25,10 +26,7 @@
         {
             "timeUnits": "sec",
             "quantityUnits": "nM",
-            "entity" : {
-                "name": "mTOR",
-                "alias": "mTOR"
-            },
+            "entity" : {"name": "mTOR","alias": "mTOR" },
             "field": "conc"
         }
     ],
@@ -36,10 +34,7 @@
         "timeUnits": "sec",
         "settleTime": 3600,
         "quantityUnits": "uM",
-        "entity" : {
-            "name": "S6Kpqr",
-            "alias": "S6KpT412"
-            },
+        "entity" : {"name": "S6Kpqr", "alias": "S6KpT412"},
         "field": "conc",
         "data": [
             [0.45, 0.01, 0],
@@ -58,9 +53,7 @@
             {"name":"eS6Kpqr+40S","alias":"S6_phos"},{"name":"eS6Kpqrs+40S","alias":"S6_phospho"},{"name":"eS6Kpqrs+CaMKIII","alias":"S6Kp_act_CaMKIII"},{"name":"bS6K","alias":"bS6K"},{"name":"emTORC1+4EBP","alias":"TOR_4EBPp"},{"name":"emTORC1+4EBPhospho","alias":"TOR_4EBP_phospho"},{"name":"S6_dephosph","alias":"S6_dephosph"}
         ],
         "parameterChange": [
-            {
-                "name": "S6K",
-                "alias": "S6K",
+            {   "entity":{ "name": "S6K","alias": "S6K"},
                 "field": "concInit",
                 "value": 0.0009,
                 "units": "mM"

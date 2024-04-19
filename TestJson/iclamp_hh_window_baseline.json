@@ -1,4 +1,5 @@
-{
+{   "FileType": "Findsim",
+    "Version": "2.0",
     "Metadata": {
         "transcriber": "Upinder S. Bhalla",
         "organization": "NCBS",
@@ -24,10 +25,7 @@
         {
             "timeUnits": "msec",
             "quantityUnits": "nA",
-            "entity" : {
-                "name": "soma",
-                "alias": "soma"
-            },
+            "entity" : {"name": "soma","alias": "soma"},
             "field": "inject",
             "data": [
                 [0,0],
@@ -39,10 +37,7 @@
     "Readouts": {
         "timeUnits": "msec",
         "quantityUnits": "mV",
-        "entity" : {
-            "name": "soma",
-            "alias": "soma"
-            },
+        "entity" : {"name": "soma","alias": "soma"},
         "field": "Vm",
 		"window": {"startt": -2, "endt": 5, "dt": 0.2, 
 				"operation": "max", "baseline": "min"
