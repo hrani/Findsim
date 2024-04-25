@@ -428,7 +428,7 @@ class SimWrapHillTau( SimWrap ):
             author = ""
         self.modifiedModelDict["Author"] = author + ": Programmatic modification by findSim at " + datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 
-    def loadModelFile( self, fname, modifyFunc, scaleParam, dumpFname, paramFname ):
+    def loadModelFile( self, fname, modifyFunc, scaleParam, dumpFname, paramFname, chemFile = None ):
         #t0 = time.time()
         #print( "Loading model file ", fname, " with numScale = ", len(scaleParam)  )
         self.turnOffElec = True
