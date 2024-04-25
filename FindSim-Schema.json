@@ -166,12 +166,20 @@
                 "field": {"type": "string" },
                 "window": {"type": "object",
                         "properties": {
-                                "startt": {"type": "number"},
-                                "endt": {"type": "number"},
-                                "dt": {"type": "number"},
-                                "operation": {"type": "string",
-                                    "enum": ["min", "max", "mean", "sdev", "oscPk", "oscVal"] },
-								"baseline": {"type": ["number","string"]}
+                            "startt": {"type": "number"},
+                            "endt": {"type": "number"},
+                            "dt": {"type": "number"},
+                            "operation": {"type": "string",
+                                "enum": ["min", "max", "mean", "sdev", "oscPk", "oscVal"] },
+							"baseline": {
+								"oneOf": [
+									{ "type": "number" },
+									{
+										"type": "string",
+										"enum": ["min","max","mean","start","end","point0","point1"]
+									}
+								]
+							}
                         },
                     "required": ["startt", "endt", "dt", "operation"],
                     "additionalProperties": false

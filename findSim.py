@@ -283,13 +283,13 @@ class Readout:
                 self.window["baseline"] = 0.0   
                 self.window["baselineOp"] = None
                 baseline = ro["window"].get("baseline")
-                if baseline in ["min", "max", "mean", "start", "end"]:
+                if baseline in ["min", "max", "mean", "start", "end", "point0", "point1"]:
                     self.window["baselineOp"] = baseline
                 elif not baseline == None:
                     try:
                         self.window["baseline"] = float( baseline )
                     except ValueError:
-                        print( "Warning: window baselineOp = '{}' must either be a number or 'min', 'max' 'mean', 'start', 'end'.".format(baseline) )
+                        print( "Warning: window baselineOp = '{}' must either be a number or 'min', 'max' 'mean', 'start', 'end', 'point0', 'point1'.".format(baseline) )
             self.normMode = "none"
             norm = ro.get( "normalization" )
             self.useNormalization = False
