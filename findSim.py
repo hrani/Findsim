@@ -714,6 +714,10 @@ class Readout:
                 bl = self.simData[0]
             elif w["baselineOp"] == "end":
                 bl = self.simData[-1]
+            elif w["baselineOp"] == "point0":
+                bl = sd[0]
+            elif w["baselineOp"] == "point1":
+                bl = sd[1]
             w["baseline"] = bl
             sd = [ x - bl for x in sd ]
             if len( self.ratioData ) == len( self.simData ): 
@@ -738,17 +742,6 @@ class Readout:
                     elif op == "sdev":
                         rd.append( np.sdev( rb ) )
                 bl = w["baseline"]      # Use baseline computed above.
-                '''
-                if w["baselineOp"] == "min":
-                    bl = min( self.ratioData )
-                elif w["baselineOp"] == "max":
-                    bl = max( self.ratioData )
-                elif w["baselineOp"] == "mean":
-                    bl = np.mean( self.ratioData )
-                elif w["baselineOp"] == "start":
-                    bl = self.ratioData[0]
-                # w["baseline"] = bl    # do NOT change baseline here.
-                '''
                 rd = [ x - bl for x in rd ]
                 self.ratioData = rd
             self.simData = sd
@@ -1531,7 +1524,8 @@ def main():
     parser.add_argument( '-map', '--map', type = str, help='Optional: mapping file from tsv names to sim-specific strings. JSON format.', default = "" )
     #parser.add_argument( '-schema', '--schema', type = str, help='Optional: Schema for json version of the findSim experiment definition. JSON format.', default = "findSimSchema.json" )
     parser.add_argument( '-d', '--dump_subset', type = str, help='Optional: dump selected subset of model into named file', default = "" )
-    parser.add_argument( '-m', '--model', type = str, help='Optional: model filename, .g or .xml', default = "" )
+    parser.add_argument( '-m', '--model', type = str, help='Optional: model filename, .g or .xml or .py', default = "" )
+    parser.add_argument( '-c', '--chemFile', type = str, help='Optional: chem model filename as part of an rdesigneur model: .g or .xml' )
     parser.add_argument( '-p', '--plot', type = str, nargs = '*', help='Optional: Plot specified fields as time-series', default = "" )
     parser.add_argument( '-tp', '--tweak_param_file', type = str, help='Optional: Generate file of tweakable params belonging to selected subset of model', default = "" )
     parser.add_argument( '-sf', '--scoreFunc', type = str, help='Optional: specify scoring function for comparing expt and sim. One can do this either as an expression of the form f(expt, sim, datarange), eg. (expt-sim)/datarange; or as NRMS which does a normalized root-mean-square. NRMS is highly recommended. Default: ' + defaultScoreFunc, default = defaultScoreFunc )
@@ -1550,7 +1544,7 @@ def main():
     simWrap = ""
     if args.model.split( '.' )[-1] == "json":
         simWrap = "HillTau"
-    innerMain( args.script, scoreFunc = args.scoreFunc, modelFile = args.model, mapFile = args.map, dumpFname = args.dump_subset, paramFname = args.tweak_param_file, hidePlot = args.hide_plot, hideSubplots = args.hide_subplots, bigFont = args.big_font, optimizeElec = args.optimize_elec, silent = not args.verbose, scaleParam = args.scale_param, settleTime = args.settle_time, tabulateOutput = args.tabulate_output, ignoreMissingObj = args.ignore_missing_obj, simWrap = simWrap, plots = args.plot, generate = args.generate, solver = args.solver )
+    innerMain( args.script, scoreFunc = args.scoreFunc, modelFile = args.model, mapFile = args.map, chemFile = args.chemFile, dumpFname = args.dump_subset, paramFname = args.tweak_param_file, hidePlot = args.hide_plot, hideSubplots = args.hide_subplots, bigFont = args.big_font, optimizeElec = args.optimize_elec, silent = not args.verbose, scaleParam = args.scale_param, settleTime = args.settle_time, tabulateOutput = args.tabulate_output, ignoreMissingObj = args.ignore_missing_obj, simWrap = simWrap, plots = args.plot, generate = args.generate, solver = args.solver )
 
 def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile = "", chemFile = None, dumpFname = "", paramFname = "", hidePlot = False, hideSubplots = True, bigFont = False, labelPos = None, deferPlot = False, optimizeElec=False, silent = False, scaleParam=[], settleTime = 0, settleDict = {}, tabulateOutput = False, ignoreMissingObj = False, simWrap = "", plots = None, generate = None, solver = "gsl" ):
     ''' If *settleTime* > 0, then we need to return a dict of concs of
