@@ -114,10 +114,10 @@ class SimError( Exception ):
 '''
 
 def notTooSmall( x ):
-    return (abs( x ) > 1e-13 ) # We have to handle sub-picoamp currents.
+    return (abs( x ) > 1e-14 ) # We have to handle sub-picoamp currents.
 
 def tooSmall( x ):
-    return (abs( x ) <= 1e-13 ) # We have to handle sub-picoamp currents.
+    return (abs( x ) <= 1e-14 ) # We have to handle sub-picoamp currents.
 
 ##########################################################################
 
@@ -356,7 +356,7 @@ class Readout:
 
     def plotCopy( self, entity, field):
         ret = copy.copy( self )
-        ret.entities = [ entity ]
+        ret.entities = {"name": entity }
         ret.field = field
         if field == 'conc' or field == 'concInit':
             if self.field in ['conc', 'concInit'] and not self.quantityUnits == 'ratio':
@@ -1036,9 +1036,9 @@ def putReadoutsInQ( q, readouts, pauseHsolve ):
                 startt = t + readouts.window["startt"] * readouts.timeScale
                 endt = t + readouts.window["endt"] * readouts.timeScale
                 dt = readouts.window["dt"] * readouts.timeScale
-                for t in np.arange( startt, endt + 1e-8, dt ):
-                    # t *= readouts.timeScale ##already scaled by timeScale
-                    heapq.heappush( q, Qentry(t, readouts, j) )
+                for tt in np.arange( startt, endt + 1e-8, dt ):
+                    #tt *= readouts.timeScale ##already scaled by timeScale
+                    heapq.heappush( q, Qentry(tt, readouts, j) )
             else:
                 heapq.heappush( q, Qentry(t, readouts, j) )
 
@@ -1447,7 +1447,7 @@ def saveTweakedModel( origFname, dumpFname, mapFile, scaleParam ):
     for i in scaleParam:
         sp.extend( i )
     localSW.deleteSimulation()
-    localSW.loadModelFile( origFname, silentDummyModify, sp, dumpFname, "")
+    localSW.loadModelFile( origFname, None, sp, dumpFname, "")
     localSW.deleteSimulation()
 
 def dummyModify( erSPlist, modelWarning ):
