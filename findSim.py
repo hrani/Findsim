@@ -1442,7 +1442,7 @@ def saveTweakedModel( origFname, dumpFname, mapFile, scaleParam ):
     if extn == '.g' or extn == '.xml':
         localSW = SimWrapMoose( mapFile = mapFile, ignoreMissingObj = True, silent = True, exptFile = "" )
     elif extn == '.json':
-        localSW = SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = True, silent = True )
+        localSW = SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = True, silent = True, exptFile = "" )
     else:
         print( "Warning: dumpTweakedModel: File format '{}' not known".format( extn ) )
         return
@@ -1502,7 +1502,7 @@ def runit( expt, model, stims, readouts, getPlots = False ):
 def getInitParams( modelFile, mapFile, paramList ):
     # ParamList as strings of objpath.field 
     if modelFile.split('.')[-1] == "json":
-        sw = SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = False, silent = False )
+        sw = SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = False, silent = False, exptFile = "" )
     else:
         sw = SimWrapMoose( mapFile = mapFile, ignoreMissingObj = False, silent = False, exptFile = "" )
 
@@ -1587,7 +1587,7 @@ def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile =
                 )
             return
         else:
-            sw = SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = ignoreMissingObj, silent = silent )
+            sw = SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = ignoreMissingObj, silent = silent, exptFile = exptFile )
             
     else:
         sw = simWrap.SimWrap( ignoreMissingObj = ignoreMissingObj )
