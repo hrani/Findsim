@@ -39,6 +39,7 @@ class SimWrap():
     def __init__( self, *args, **kwargs ):
         self.ignoreMissingObj = kwargs["ignoreMissingObj"]
         self.silent = kwargs["silent"]
+        self.exptFile = kwargs["exptFile"]
         self.modelLookup = {}
         self.runtime = 0.0
         self.loadtime = 0.0

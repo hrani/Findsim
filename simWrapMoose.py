@@ -780,7 +780,7 @@ class SimWrapMoose( SimWrap ):
             if foundObj.name == '/':
                 if isSilent:
                     return -2.0
-                raise SimError( "SimWrapMoose::getObjParam: Entity {} not found, check Object map".format( entity ) )
+                raise SimError( "SimWrapMoose {}: getObjParam: Entity {} not found, check Object map".format( self.exptFile, entity ) )
             else:
                 self.modelLookup[ entity ] = [ foundObj.path ]
         elmPathList = self.lookup(entity)

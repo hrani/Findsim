@@ -247,8 +247,9 @@ class Readout:
     fepspFields = [ 'fEPSP_peak','fEPSP_slope','fIPSP_peak','fIPSP_slope' ]
     postSynFields = fepspFields + epspFields + epscFields
     elecFields = ['Vm', 'Im', 'current'] + epspFields + epscFields
-    def __init__( self, findsim, isPlotOnly = False ):
+    def __init__( self, findsim, exptFile = "", isPlotOnly = False ):
         self.findsim = findsim
+        self.exptFile = exptFile
         ro = findsim["Readouts"]
         self.directParamData = ro.get( "paramdata" )
         self.isPlotOnly = isPlotOnly
@@ -420,7 +421,8 @@ class Readout:
             # Treat the output as all zeroes in this case.
             self.simData = [0.0] * len( ref )
             #raise SimError( "runDoser: Normalization3 failed due to zero denominator" )
-            print( "Warning: runDoser: Normalization3 failed due to zero denominator: ", str( min( ref ) ) )
+            #print( "Warning: runDoser: Normalization3 failed due to zero denominator: ", str( min( ref ) ) )
+            print( "RunDoser {}: Normalization3 denom={:.3g} for {}.{}".format( self.exptFile, min(ref), self.entities, self.field ) )
             return
 
 
@@ -891,10 +893,11 @@ class Model:
     - parameter changes, in which fields get set. \n
     - structural changes, in which the model itself is altered. \n
     """
-    def __init__( self, findsim, mapFile ):
+    def __init__( self, findsim, exptFile, mapFile ):
         self.modelSubset = []
         self.parameterChange = []
         self.itemsToDelete = []
+        self.exptFile = exptFile
         mod = findsim.get( "Modifications" )
         if mod:
             if "subset" in mod:
@@ -1185,12 +1188,12 @@ def parseAndRun( model, stims, readouts, getPlots = False ):
     if readouts.useNormalization and readouts.normMode == "each":
         if len( [ y for y in readouts.ratioData if tooSmall(y) ] ) > 0:
             #raise SimError( "runDoser: Normalization1 failed due to zero denominator: " + str( min( readouts.ratioData ) ) )
-            print( "parseAndRun: Normalization1 denom={:.3g} for {}.{}".format(min( readouts.ratioData ), readouts.entities, readouts.field ) )
+            print( "parseAndRun{}: Normalization1 denom={:.3g} for {}.{}".format(model.exptFile, min( readouts.ratioData ), readouts.entities, readouts.field ) )
         readouts.simData = [ x/y if notTooSmall(y) else 0.0 for x, y in zip(readouts.simData, readouts.ratioData) ]
     else:
         if tooSmall(norm):
             #raise SimError( "runDoser: Normalization2 failed due to zero denominator: " + str( norm ) )
-            print( "parseAndRun: Normalization2 denom={:.3g} for {}.{}".format( norm, readouts.entities, readouts.field ) )
+            print( "parseAndRun {}: Normalization2 denom={:.3g} for {}.{}".format( model.exptFile, norm, readouts.entities, readouts.field ) )
             readouts.simData = [0.0] *len( readouts.simData )
         else:
             readouts.simData = [ x/norm for x in readouts.simData ]
@@ -1437,7 +1440,7 @@ def saveTweakedModel( origFname, dumpFname, mapFile, scaleParam ):
     # does a fresh load, tweaks the params, and saves.
     fname, extn = os.path.splitext( dumpFname )
     if extn == '.g' or extn == '.xml':
-        localSW = SimWrapMoose( mapFile = mapFile, ignoreMissingObj = True, silent = True )
+        localSW = SimWrapMoose( mapFile = mapFile, ignoreMissingObj = True, silent = True, exptFile = "" )
     elif extn == '.json':
         localSW = SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = True, silent = True )
     else:
@@ -1478,8 +1481,8 @@ def loadJson( fname, mapFile ):
         raise
     expt = Experiment( findsim["Metadata"], findsim["Experiment"] )
     stims = Stimulus.load( findsim ) # Stimuli are an optional argument
-    readouts = Readout( findsim )
-    model = Model( findsim, mapFile ) # mods are an optional argument.
+    readouts = Readout( findsim, exptFile = fname )
+    model = Model( findsim, fname, mapFile ) # mods are an optional argument.
     return expt, stims, readouts, model
 
 def runit( expt, model, stims, readouts, getPlots = False ):
@@ -1501,7 +1504,7 @@ def getInitParams( modelFile, mapFile, paramList ):
     if modelFile.split('.')[-1] == "json":
         sw = SimWrapHillTau( mapFile = mapFile, ignoreMissingObj = False, silent = False )
     else:
-        sw = SimWrapMoose( mapFile = mapFile, ignoreMissingObj = False, silent = False )
+        sw = SimWrapMoose( mapFile = mapFile, ignoreMissingObj = False, silent = False, exptFile = "" )
 
     sw.deleteSimulation()
     sw.loadModelFile( modelFile, silentDummyModify, [], "", "" )
@@ -1574,7 +1577,7 @@ def innerMain( exptFile, scoreFunc = defaultScoreFunc, modelFile = "", mapFile =
     if model.fileName.split('.')[-1] == "json":
         simWrap = "HillTau"
     if simWrap == "":
-        sw = SimWrapMoose( mapFile = mapFile, ignoreMissingObj = ignoreMissingObj, silent = silent )
+        sw = SimWrapMoose( mapFile = mapFile, ignoreMissingObj = ignoreMissingObj, silent = silent, exptFile = exptFile )
     elif simWrap == "HillTau":
         global foundLib_HillTau_
         if not foundLib_HillTau_:
