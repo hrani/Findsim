@@ -42,9 +42,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Build
         run: |
-          git clone https://github.com/BhallaLab/moose-core.git
-          cd moose-core
-          python -m pip install .
+          python -m pip install git+https://github.com/BhallaLab/moose-core.git
           python -m pip install jsonschema
       - name: Test scripts
         run: ./test.sh
